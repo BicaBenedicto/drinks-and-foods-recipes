@@ -6,7 +6,7 @@ function Comidas() {
     <>
       <Header pageTitle="Comidas" />
       <div>
-        Empty
+        pagina de comidas
       </div>
     </>
   );

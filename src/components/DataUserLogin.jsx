@@ -13,7 +13,7 @@ export default function DataUserLogin() {
   function handleEntrarButton() {
     const minLengthPassword = 6;
     const emailIsValid = email.includes('@') && email.includes('.com');
-    const passwordIsValid = password.length > minLengthPassword;
+    const passwordIsValid = password.length >= minLengthPassword;
     if (emailIsValid && passwordIsValid) {
       localStorage.setItem('mealsToken', JSON.stringify(1));
       localStorage.setItem('cocktailsToken', JSON.stringify(1));

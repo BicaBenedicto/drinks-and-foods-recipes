@@ -4,7 +4,6 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
-  console.log(props);
   return (
     <header id="header-main">
       <img

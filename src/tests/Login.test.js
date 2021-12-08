@@ -23,7 +23,7 @@ describe('Tela de Login', () => {
     userEvent.type(inputEmail, INCORRECT_EMAIL);
     userEvent.type(inputPassword, INCORRECT_PASSWORD);
     expect(buttonSumbit).toBeInTheDocument();
-    expect(buttonSumbit).toBeDisabled();
+    expect(buttonSumbit.disabled).toBe(true);
   });
 
   test(`Verfica se o botão deve estar ativado se o email
@@ -33,7 +33,7 @@ describe('Tela de Login', () => {
     userEvent.type(inputEmail, EMAIL);
     userEvent.type(inputPassword, PASSWORD);
     expect(buttonSumbit).toBeInTheDocument();
-    expect(buttonSumbit).not.toBeDisabled();
+    expect(buttonSumbit.disabled).toBe(false);
   });
 
   test(`Após a submissão mealsToken e cocktailsToken devem estar salvos em 
@@ -45,8 +45,8 @@ describe('Tela de Login', () => {
     userEvent.click(buttonSumbit);
     const mealsToken = localStorage.getItem('mealsToken');
     const cocktailsToken = localStorage.getItem('cocktailsToken');
-    expect(mealsToken).toBe(1);
-    expect(cocktailsToken).toBe(1);
+    expect(mealsToken).toBe('1');
+    expect(cocktailsToken).toBe('1');
   });
 
   test(`Verifica se após a submissão a chave user deve estar salva em 
@@ -57,15 +57,16 @@ describe('Tela de Login', () => {
     userEvent.type(inputPassword, PASSWORD);
     userEvent.click(buttonSumbit);
     const user = JSON.parse(localStorage.getItem('user'));
-    expect(user).toBe(EMAIL);
+    expect(user).toEqual({ email: EMAIL });
   });
 
   test('Verifica se rota muda para a tela principal de receitas de comidas', () => {
-    const { history: { location } } = renderWithRouter(<App />);
+    renderWithRouter(<App />);
     const { inputEmail, inputPassword, buttonSumbit } = components();
     userEvent.type(inputEmail, EMAIL);
     userEvent.type(inputPassword, PASSWORD);
     userEvent.click(buttonSumbit);
-    expect(location.pathname).toBe('/comidas');
+    const pageFood = screen.getByText(/pagina de comidas/i);
+    expect(pageFood).toBeInTheDocument();
   });
 });
