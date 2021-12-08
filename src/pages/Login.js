@@ -2,7 +2,7 @@ import React from 'react';
 import rockGlass from '../images/rockGlass.svg';
 import DataUserLogin from '../components/DataUserLogin';
 
-export default function login() {
+export default function Login() {
   return (
     <div className="meals">
       <span className="logo">TRYBE</span>

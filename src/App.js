@@ -21,7 +21,7 @@ function App() {
   return (
     <Provider store={ store }>
       <Context.Provider value={ STORE_CONTEXT }>
-        <Header { ...props } />
+        <Header />
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route path="/comidas" component={ Comidas } />
