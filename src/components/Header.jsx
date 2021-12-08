@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import Context from '../services/Context';
+import React from 'react';
+import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header(props) {
-  console.log(props);
+  const { pageTitle } = props;
+
   return (
     <header id="header-main">
       <img
@@ -17,7 +18,7 @@ function Header(props) {
         className="header-page-title"
         data-testid="page-title"
       >
-        {}
+        {pageTitle}
       </h1>
       <button type="button">
         <img
@@ -30,5 +31,9 @@ function Header(props) {
     </header>
   );
 }
+
+Header.propTypes = {
+  pageTitle: PropTypes.string.isRequired,
+};
 
 export default Header;
