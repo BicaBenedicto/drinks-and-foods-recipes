@@ -23,10 +23,13 @@ import ReceitasFeitas from './pages/ReceitasFeitas';
 
 function App() {
   const [login, changeLogin] = useState({ email: '', password: '' });
+  const [searchFood, setSearchFood] = useState({ value: '', type: 'nome' });
 
   const STORE_CONTEXT = {
     login,
     changeLogin,
+    searchFood,
+    setSearchFood,
   };
 
   return (

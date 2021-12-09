@@ -1,8 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen, render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
-import renderWithRedux from '../services/renderWithRedux';
 import App from '../App';
 
 const EMAIL = 'trybe@trybe.com';
