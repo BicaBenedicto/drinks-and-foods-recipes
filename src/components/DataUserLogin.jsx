@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionLogin } from '../redux/actions';
@@ -35,7 +35,7 @@ export default function DataUserLogin() {
     changeLogin({ ...login, [name]: value });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleEntrarButton();
   }, [email, password]);
   return (
