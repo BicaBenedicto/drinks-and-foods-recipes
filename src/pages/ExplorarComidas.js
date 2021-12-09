@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function ReceitasFavoritas() {
+function ExplorarComidas() {
   return (
     <>
-      <Header pageTitle="Receitas Favoritas" />
+      <Header pageTitle="Explorar Comidas" />
       <div>
         Empty
       </div>
@@ -12,4 +12,4 @@ function ReceitasFavoritas() {
   );
 }
 
-export default ReceitasFavoritas;
+export default ExplorarComidas;
