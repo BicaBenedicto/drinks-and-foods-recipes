@@ -61,14 +61,14 @@ describe('Tela de Login', () => {
     expect(user).toEqual({ email: EMAIL });
   });
 
-  test('Verifica se rota muda para a tela principal de receitas de comidas', () => {
+  test('Verifica se rota muda para a tela principal de receitas de comidas', async () => {
     renderWithRouter(<App />);
     const { inputEmail, inputPassword, buttonSumbit } = components();
     userEvent.type(inputEmail, EMAIL);
     userEvent.type(inputPassword, PASSWORD);
     userEvent.click(buttonSumbit);
-    const pageFood = screen.getAllByText(/comidas/i);
-    expect(pageFood[0]).toBeInTheDocument();
+    const pageFood = await screen.findByRole('heading', { name: /comidas/i, level: '1' });
+    expect(pageFood).toBeInTheDocument();
   });
 
   test('', () => {
