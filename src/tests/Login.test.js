@@ -1,12 +1,13 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
-import renderWithRouter from '../services/renderWithRouter';
+import renderWithRouter from './renderWithRouter';
+import userReducer from '../redux/reducers/user';
 import App from '../App';
 
 const EMAIL = 'trybe@trybe.com';
 const INCORRECT_EMAIL = 'trybetrybe';
-const PASSWORD = '123456';
+const PASSWORD = '1234567';
 const INCORRECT_PASSWORD = '12345';
 
 const components = () => ({
@@ -66,15 +67,14 @@ describe('Tela de Login', () => {
     userEvent.type(inputEmail, EMAIL);
     userEvent.type(inputPassword, PASSWORD);
     userEvent.click(buttonSumbit);
-    const pageFood = screen.getByText(/pagina de comidas/i);
-    expect(pageFood).toBeInTheDocument();
+    const pageFood = screen.getAllByText(/comidas/i);
+    expect(pageFood[0]).toBeInTheDocument();
   });
 
-  // test('', () => {
-  //   const { queryByText } = renderWithRedux(<App />, { initialState: { email: EMAIL, password: PASSWORD } });
-  //   const { , inputPassword } = components();
-  //   expect(queryByText(EMAIL)).toBeInTheDocument();
-  //   expect(inputPassword.value).toBe(PASSWORD);
-  //   expect(queryByText()).toHaveValue(PASSWORD);
-  // });
+  test('', () => {
+    expect(userReducer({ email: '' },
+      { type: 'GET_EMAIL', payload: EMAIL })).toEqual({ email: EMAIL });
+    expect(userReducer({ email: '' },
+      { type: 'SEI LA' })).toEqual({ email: '' });
+  });
 });
