@@ -7,17 +7,16 @@ import SearchBar from './SearchBar';
 import '../styles/header.css';
 
 function Header(props) {
-  const pageActual = useLocation().pathname;
   const history = useHistory();
   const redirectToPerfil = () => history.push('/perfil');
   const [renderSearchBar, setRenderSearchBar] = useState(false);
   const { pageTitle } = props;
 
   const verifyPageActual = () => {
-    const explorarVerify = pageActual.includes('explorar')
-      && !pageActual.includes('area');
-    const perfilAndReceitasVerify = pageActual.includes('receitas')
-      || pageActual.includes('perfil');
+    const explorarVerify = pageTitle.includes('Explorar')
+      && !pageTitle.includes('Origem');
+    const perfilAndReceitasVerify = pageTitle.includes('Receitas')
+      || pageTitle.includes('Perfil');
     if (explorarVerify || perfilAndReceitasVerify) return false;
     return true;
   };

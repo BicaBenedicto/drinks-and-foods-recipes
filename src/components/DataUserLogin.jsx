@@ -1,19 +1,20 @@
 import React, { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { actionLogin } from '../redux/actions';
 import Context from '../services/Context';
 
 export default function DataUserLogin() {
   const { login, changeLogin } = useContext(Context);
   const { email, password } = login;
+  const history = useHistory();
   const [buttonActivated, setButtonActivated] = React.useState(false);
   const saveLogin = useDispatch();
 
   function handleEntrarButton() {
     const minLengthPassword = 6;
     const emailIsValid = email.includes('@') && email.includes('.com');
-    const passwordIsValid = password.length >= minLengthPassword;
+    const passwordIsValid = password.length > minLengthPassword;
     if (emailIsValid && passwordIsValid) {
       localStorage.setItem('mealsToken', JSON.stringify(1));
       localStorage.setItem('cocktailsToken', JSON.stringify(1));
@@ -28,6 +29,7 @@ export default function DataUserLogin() {
     e.preventDefault();
     localStorage.setItem('user', JSON.stringify({ email }));
     saveLogin(actionLogin(email));
+    history.push('/comidas');
   };
 
   const onChangeInput = ({ target }) => {
@@ -56,15 +58,13 @@ export default function DataUserLogin() {
         placeholder="Digite sua senha"
         data-testid="password-input"
       />
-      <Link to="/comidas">
-        <button
-          disabled={ !buttonActivated }
-          type="submit"
-          data-testid="login-submit-btn"
-        >
-          Entrar
-        </button>
-      </Link>
+      <button
+        disabled={ !buttonActivated }
+        type="submit"
+        data-testid="login-submit-btn"
+      >
+        Entrar
+      </button>
     </form>
   );
 }
