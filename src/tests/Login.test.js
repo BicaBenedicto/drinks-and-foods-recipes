@@ -1,7 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
+import renderWithRedux from '../services/renderWithRedux';
 import App from '../App';
 
 const EMAIL = 'trybe@trybe.com';
@@ -69,4 +70,12 @@ describe('Tela de Login', () => {
     const pageFood = screen.getByText(/pagina de comidas/i);
     expect(pageFood).toBeInTheDocument();
   });
+
+  // test('', () => {
+  //   const { queryByText } = renderWithRedux(<App />, { initialState: { email: EMAIL, password: PASSWORD } });
+  //   const { , inputPassword } = components();
+  //   expect(queryByText(EMAIL)).toBeInTheDocument();
+  //   expect(inputPassword.value).toBe(PASSWORD);
+  //   expect(queryByText()).toHaveValue(PASSWORD);
+  // });
 });
