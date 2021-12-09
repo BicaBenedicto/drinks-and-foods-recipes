@@ -9,7 +9,6 @@ import '../styles/header.css';
 function Header(props) {
   const history = useHistory();
   const redirectToPerfil = () => history.push('/perfil');
-  const search = useState(true);
   const [renderSearchBar, setRenderSearchBar] = useState(false);
   const { pageTitle } = props;
 
@@ -41,7 +40,7 @@ function Header(props) {
         <h1 className="header-page-title" data-testid="page-title">
           { pageTitle }
         </h1>
-        { search && (
+        { verifyPageActual() && (
           <button
             type="button"
             onClick={ () => setRenderSearchBar(!renderSearchBar) }
