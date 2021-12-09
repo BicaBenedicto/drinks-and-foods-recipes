@@ -7,8 +7,6 @@ import SearchBar from './SearchBar';
 import '../styles/header.css';
 
 function Header(props) {
-<<<<<<< HEAD
-=======
   const pageActual = useLocation().pathname;
   const history = useHistory();
   const redirectToPerfil = () => history.push('/perfil');
@@ -24,7 +22,6 @@ function Header(props) {
     return true;
   };
 
->>>>>>> 4827ebe11c055d6682681aacbe3bdcba66b1d82a
   return (
     <div>
       <header className="header-main" id="header-main">
