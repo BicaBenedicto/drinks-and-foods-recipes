@@ -1,32 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 import '../styles/header.css';
 
 function Header(props) {
-  const pageActual = useLocation().pathname;
   const history = useHistory();
   const redirectToPerfil = () => history.push('/perfil');
+  const search = useState(true);
   const [renderSearchBar, setRenderSearchBar] = useState(false);
   const { pageTitle } = props;
-
-  const verifyPageActual = () => {
-    const explorarVerify = pageActual.includes('explorar')
-      && !pageActual.includes('area');
-    const perfilAndReceitasVerify = pageActual.includes('receitas')
-      || pageActual.includes('perfil');
-    if (explorarVerify || perfilAndReceitasVerify) return false;
-    return true;
-  };
 
   return (
     <div>
       <header className="header-main" id="header-main">
         <button
           type="button"
+          data-testid="profile-top-btn"
           onClick={ redirectToPerfil }
           src={ profileIcon }
         >
@@ -40,7 +32,7 @@ function Header(props) {
         <h1 className="header-page-title" data-testid="page-title">
           { pageTitle }
         </h1>
-        { (verifyPageActual()) && (
+        { search && (
           <button
             type="button"
             onClick={ () => setRenderSearchBar(!renderSearchBar) }
