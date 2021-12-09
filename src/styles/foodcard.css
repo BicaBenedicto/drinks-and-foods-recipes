@@ -1,0 +1,43 @@
+.all-categories {
+  padding: 20px;
+  text-align: center;
+}
+
+.all-categorie {
+  background-color: lightgrey;
+  border-radius: 10px;
+  font-size : 20px;
+  font-weight: 700;
+}
+
+.meals-categories {
+  background-color: lightgrey;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.foodcard {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.foods-cards link {
+  width: 100%;
+}
+
+.card {
+  display: inline-block;
+  margin: auto;
+  width: 50%;
+}
+
+.foodcard img {
+  width: 50%;
+}
+
+.name-card-food {
+  width: 30%;
+}
