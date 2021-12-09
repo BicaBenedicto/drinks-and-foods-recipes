@@ -13,6 +13,15 @@ function Header(props) {
   const [renderSearchBar, setRenderSearchBar] = useState(false);
   const { pageTitle } = props;
 
+  const verifyPageActual = () => {
+    const explorarVerify = pageTitle.includes('Explorar')
+      && !pageTitle.includes('Origem');
+    const perfilAndReceitasVerify = pageTitle.includes('Receitas')
+      || pageTitle.includes('Perfil');
+    if (explorarVerify || perfilAndReceitasVerify) return false;
+    return true;
+  };
+
   return (
     <div>
       <header className="header-main" id="header-main">
