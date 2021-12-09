@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function ReceeitasFeitas() {
+function ExplorarComidasArea() {
   return (
     <>
-      <Header pageTitle="Receitas Feitas" />
+      <Header pageTitle="Explorar Origem" />
       <div>
         Empty
       </div>
@@ -12,4 +12,4 @@ function ReceeitasFeitas() {
   );
 }
 
-export default ReceeitasFeitas;
+export default ExplorarComidasArea;
