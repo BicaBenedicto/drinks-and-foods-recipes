@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from './renderWithRouter';
+import renderWithRedux from './renderWithRedux';
 import App from '../App';
 import Comidas from '../pages/Comidas';
 import ComidaDetails from '../pages/ComidaDetails';
@@ -55,17 +55,11 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de comidas', () => {
-    renderWithRouter(<Comidas />);
+    renderWithRedux(<Comidas />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comidas');
     profileIconTest();
     searchIconTest();
-
-    const { searchIcon } = GET_BY;
-    fireEvent.click(searchIcon());
-
-    const searchInput = screen.getByTestId('search-input');
-    expect(searchInput).toBeInTheDocument();
   });
 
   it('o componente header não aparece na página de comida detalhadas', () => {
@@ -85,7 +79,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de bebidas', () => {
-    renderWithRouter(<Bebidas />);
+    renderWithRedux(<Bebidas />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebidas');
     profileIconTest();

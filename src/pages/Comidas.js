@@ -1,30 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/actions';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
 
-const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const pageActual = 'Comidas';
 
 function Foods() {
-  const [foods, setFoods] = useState({});
-  const [categories, setCategories] = useState({});
+  const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
 
-  const fetchComidas = (endPointFetch, setState) => {
-    fetch(endPointFetch)
-      .then((resolve) => resolve.json())
-      .then((response) => setState(response));
-  };
-
   useEffect(() => {
-    fetchComidas(endPoint, setFoods);
-    fetchComidas('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setCategories);
+    disp(actionFetchList(pageActual));
+    disp(actionFetchName('', pageActual));
   }, []);
 
-  if (!foods.meals || !categories.meals) {
+  const { list, categories } = useSelector((state) => state.meal);
+
+  if (!list || !categories) {
     return <div>Carregando...</div>;
   }
 
@@ -37,18 +33,18 @@ function Foods() {
     });
     if (target.checked) {
       if (strCategory === 'All') {
-        fetchComidas(endPoint, setFoods);
+        disp(actionFetchName('', pageActual));
       } else {
-        fetchComidas(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${strCategory}`, setFoods);
+        disp(actionFetchCategory(strCategory, pageActual));
       }
     } else {
-      fetchComidas(endPoint, setFoods);
+      disp(actionFetchName('', pageActual));
     }
   }
 
   return (
     <div className="main-page">
-      <Header pageTitle="Comidas" />
+      <Header pageTitle={ pageActual } />
       <div className="all-categories">
         <label htmlFor="All">
           <input
@@ -63,7 +59,7 @@ function Foods() {
           All
         </label>
         {
-          categories.meals.filter((_, index) => index < categoriesLength)
+          categories.filter((_, index) => index < categoriesLength)
             .map((category, index) => (
               <label
                 className="meals-categories"
@@ -83,8 +79,8 @@ function Foods() {
             ))
         }
       </div>
-      <div className="foods-cards">
-        { foods.meals.filter((_, index) => index < mealsLength)
+      <div className="meals-cards">
+        { list.filter((_, index) => index < mealsLength)
           .map((meal, index) => (
             <Link
               className="card"
@@ -104,4 +100,4 @@ function Foods() {
   );
 }
 
-export default connect()(Foods);
+export default Foods;

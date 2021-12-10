@@ -26,7 +26,6 @@ function Header(props) {
       <header className="header-main" id="header-main">
         <button
           type="button"
-          data-testid="profile-top-btn"
           onClick={ redirectToPerfil }
           src={ profileIcon }
         >
