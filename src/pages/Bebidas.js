@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import Footer from '../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/actions';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
+import Footer from '../components/Footer';
 
 const pageActual = 'Bebidas';
 
