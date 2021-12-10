@@ -9,13 +9,13 @@ import '../styles/foodcard.css';
 const pageActual = 'Comidas';
 
 function Foods() {
-  const dispatch = useDispatch();
+  const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
 
   useEffect(() => {
-    dispatch(actionFetchList(pageActual));
-    dispatch(actionFetchName('', pageActual));
+    disp(actionFetchList(pageActual));
+    disp(actionFetchName('', pageActual));
   }, []);
 
   const { list, categories } = useSelector((state) => state.meal);
@@ -33,12 +33,12 @@ function Foods() {
     });
     if (target.checked) {
       if (strCategory === 'All') {
-        dispatch(actionFetchName('', pageActual));
+        disp(actionFetchName('', pageActual));
       } else {
-        dispatch(actionFetchCategory(strCategory, pageActual));
+        disp(actionFetchCategory(strCategory, pageActual));
       }
     } else {
-      dispatch(actionFetchName('', pageActual));
+      disp(actionFetchName('', pageActual));
     }
   }
 
