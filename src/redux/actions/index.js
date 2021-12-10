@@ -22,7 +22,14 @@ export const actionFetchIngrediente = (type, page) => (dispatch) => (
 
 export const actionFetchName = (type, page) => (dispatch) => (
   fetchName(type, page)
-    .then((response) => dispatch(actionMeals(response))));
+    .then((response) => {
+      console.log(response);
+      if (!response) {
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      } else {
+        dispatch(actionMeals(response));
+      }
+    }));
 
 export const actionFetchFirstLetter = (type, page) => (dispatch) => (
   fetchFirstLetter(type, page)

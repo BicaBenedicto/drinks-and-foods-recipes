@@ -31,10 +31,8 @@ async function fetchIngrediente(ingrediente, page) {
 
 async function fetchName(name, page) {
   const { searchByName } = URL;
-  console.log(`${searchByName[page.toLowerCase()]}${name}`);
   const response = await fetch(`${searchByName[page.toLowerCase()]}${name}`);
   const result = await response.json();
-  console.log(result);
   return result.meals || result.drinks;
 }
 

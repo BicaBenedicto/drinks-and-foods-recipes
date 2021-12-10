@@ -19,13 +19,6 @@ function Foods() {
   }, []);
 
   const { list, categories } = useSelector((state) => state.meal);
-  useEffect(() => {
-    if (!list && categories) {
-      dispatch(actionFetchName('', pageActual));
-      return global
-        .alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    }
-  });
 
   if (!list || !categories) {
     return <div>Carregando...</div>;
