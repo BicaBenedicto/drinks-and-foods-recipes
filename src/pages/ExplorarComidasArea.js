@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function ExplorarComidasArea() {
@@ -8,6 +9,7 @@ function ExplorarComidasArea() {
       <div>
         Empty
       </div>
+      <Footer />
     </>
   );
 }

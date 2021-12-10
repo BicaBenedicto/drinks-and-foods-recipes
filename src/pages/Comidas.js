@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Cards from '../components/Cards';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
 
@@ -10,6 +11,7 @@ const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 function Foods() {
   const [foods, setFoods] = useState({});
   const [categories, setCategories] = useState({});
+  const x = useSelector((state) => state.user.foods);
   const mealsLength = 12;
   const categoriesLength = 5;
 
@@ -63,7 +65,7 @@ function Foods() {
           All
         </label>
         {
-          categories.meals.filter((_, index) => index < categoriesLength)
+          x && x.filter((_, index) => index < categoriesLength)
             .map((category, index) => (
               <label
                 className="meals-categories"
@@ -84,7 +86,7 @@ function Foods() {
         }
       </div>
       <div className="foods-cards">
-        { foods.meals.filter((_, index) => index < mealsLength)
+        { x && x.filter((_, index) => index < mealsLength)
           .map((meal, index) => (
             <Link
               className="card"
@@ -100,6 +102,7 @@ function Foods() {
             </Link>
           ))}
       </div>
+      <Footer />
     </div>
   );
 }
