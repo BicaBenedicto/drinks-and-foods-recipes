@@ -2,14 +2,16 @@ import React, { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 import Context from '../services/Context';
-import typeAction from '../services/searchBarAction';
+import { actionFetchIngrediente, actionFetchName,
+  actionFetchFirstLetter } from '../redux/actions';
 
 function SearchBar() {
   const { searchFood, setSearchFood } = useContext(Context);
+  const { list } = useSelector((state) => state.meal);
   const pageActual = useLocation().pathname;
+  const page = pageActual.replace('/', '');
   const dispatch = useDispatch();
   const history = useHistory();
-  const foods = useSelector((state) => state.user.foods);
 
   function handleChange({ target }) {
     if (target.name === 'searchInput') {
@@ -20,15 +22,12 @@ function SearchBar() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    const { ingrendiente, nameFood, firstLeter } = typeAction(pageActual);
     if (searchFood.type === 'ingrediente') {
-      dispatch(ingrendiente(searchFood.value));
-    }
-    if (searchFood.type === 'nome') {
-      dispatch(nameFood(searchFood.value));
-    }
-    if (searchFood.type === 'primeira-letra' && searchFood.value.length === 1) {
-      dispatch(firstLeter(searchFood.value));
+      dispatch(actionFetchIngrediente(searchFood.value, page));
+    } else if (searchFood.type === 'nome') {
+      dispatch(actionFetchName(searchFood.value, page));
+    } else if (searchFood.type === 'primeira-letra' && searchFood.value.length === 1) {
+      dispatch(actionFetchFirstLetter(searchFood.value, page));
     } else {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
@@ -36,10 +35,10 @@ function SearchBar() {
   }
 
   function oneRecipe() {
-    if (foods && foods.length === 1) {
+    if (list && list.length === 1) {
       const url = pageActual.includes('comidas')
-        ? `/comidas/${foods[0].idMeal}`
-        : `/bebidas/${foods[0].idDrink}`;
+        ? `${pageActual}/${list[0].idMeal}`
+        : `${pageActual}/${list[0].idDrink}`;
       return history.push(url);
     }
   }
