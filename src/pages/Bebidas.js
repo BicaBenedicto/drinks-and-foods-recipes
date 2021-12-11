@@ -5,6 +5,7 @@ import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/
 import Cards from '../components/Cards';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
+import Footer from '../components/Footer';
 
 const pageActual = 'Bebidas';
 
@@ -96,6 +97,7 @@ function Bebidas() {
             </Link>
           ))}
       </div>
+      <Footer />
     </div>
   );
 }
