@@ -14,9 +14,17 @@ function ComidaDetails() {
 
   return (
     <div className="recomendation">
-      { renderList.map((itemList) => (
-        <div key={ itemList[`id${TYPE}`] } className="recomendation-item" data-testid="recomendation-card">
-          <span>{ itemList[`str${TYPE}`] }</span>
+      { renderList.map((itemList, index) => (
+        <div
+          key={ itemList[`id${TYPE}`] }
+          className="recomendation-item"
+          data-testid={ `${index}-recomendation-card` }
+        >
+          <span
+            data-testid={ `${index}-recomendation-title` }
+          >
+            { itemList[`str${TYPE}`] }
+          </span>
           <img src={ itemList[`str${TYPE}Thumb`] } alt={ itemList[`str${TYPE}`] } />
         </div>
       )) }
