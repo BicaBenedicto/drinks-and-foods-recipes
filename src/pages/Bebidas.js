@@ -87,7 +87,7 @@ function Bebidas() {
               className="card"
               data-testid={ `${index}-recipe-card` }
               key={ index }
-              to={ `/comidas/${meal.idDrink}` }
+              to={ `/bebidas/${meal.idDrink}` }
             >
               <Cards
                 name={ meal.strDrink }
