@@ -19,43 +19,55 @@ const URL = {
     comidas: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
   },
+  renderByID: {
+    comidas: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
+    bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
+  },
 };
 
 async function fetchIngrediente(ingrediente, page) {
   const { searchByIngredients } = URL;
   const response = await fetch(`${searchByIngredients[page
     .toLowerCase()]}${ingrediente}`);
-  const result = await response.json();
-  return result.meals || result.drinks;
+  const results = await response.json();
+  return results.meals || results.drinks;
 }
 
 async function fetchName(name, page) {
   const { searchByName } = URL;
   const response = await fetch(`${searchByName[page.toLowerCase()]}${name}`);
-  const result = await response.json();
-  return result.meals || result.drinks;
+  const results = await response.json();
+  return results.meals || results.drinks;
 }
 
 async function fetchFirstLetter(firstLetter, page) {
   const { searchByFirstLetter } = URL;
   const response = await fetch(`${searchByFirstLetter[page
     .toLowerCase()]}${firstLetter}`);
-  const result = await response.json();
-  return result.meals || result.drinks;
+  const results = await response.json();
+  return results.meals || results.drinks;
 }
 
 async function fetchCategory(category, page) {
   const { searchByCategory } = URL;
   const response = await fetch(`${searchByCategory[page.toLowerCase()]}${category}`);
-  const result = await response.json();
-  return result.meals || result.drinks;
+  const results = await response.json();
+  return results.meals || results.drinks;
 }
 
 async function fetchList(page) {
   const { renderByList } = URL;
   const response = await fetch(`${renderByList[page.toLowerCase()]}`);
-  const result = await response.json();
-  return result.meals || result.drinks;
+  const results = await response.json();
+  return results.meals || results.drinks;
+}
+
+async function fetchID(id, page) {
+  const { renderByID } = URL;
+  const response = await fetch(`${renderByID[page.toLowerCase()]}${id}`);
+  const results = await response.json();
+  console.log(results);
+  return results;
 }
 
 export {
@@ -64,4 +76,5 @@ export {
   fetchFirstLetter,
   fetchCategory,
   fetchList,
+  fetchID,
 };

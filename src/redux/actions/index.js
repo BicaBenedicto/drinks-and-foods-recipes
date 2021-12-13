@@ -4,6 +4,7 @@ import {
   fetchName,
   fetchCategory,
   fetchList,
+  fetchID,
 } from '../../services/fetchFood';
 
 export const GET_EMAIL = 'GET_EMAIL';
@@ -23,7 +24,6 @@ export const actionFetchIngrediente = (type, page) => (dispatch) => (
 export const actionFetchName = (type, page) => (dispatch) => (
   fetchName(type, page)
     .then((response) => {
-      console.log(response);
       if (!response) {
         global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       } else {
@@ -43,3 +43,7 @@ export const actionFetchCategory = (type, page) => (dispatch) => (
 export const actionFetchList = (page) => (dispatch) => (
   fetchList(page)
     .then((response) => dispatch(actionCategories(response))));
+
+export const actionFetchID = (id, page) => (dispatch) => (
+  fetchID(id, page)
+    .then((response) => dispatch(actionMeals(response))));
