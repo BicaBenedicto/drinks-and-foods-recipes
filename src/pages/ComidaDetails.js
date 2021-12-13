@@ -1,14 +1,34 @@
 import React from 'react';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
+import StartButton from '../components/StartButton';
 
-function ComidaDetails() {
+export default function comidaDetails() {
   return (
-    <>
-      <h1>detalhes da comida</h1>
+    <main>
       <div>
-        Empty
+        <img
+          data-testid="recipe-photo"
+          alt="imagem-da-comida"
+          width="100px"
+          height="100px"
+        />
+        <h1 data-testid="recipe-title">titulo da comida</h1>
+        <h4 data-testid="recipe-category">
+          categoria da comida
+        </h4>
+        <span data-testid="instructions">intruções</span>
+        <iframe
+          title="titulounico"
+          data-testid="video"
+          width="420"
+          height="345"
+        />
+        ))
       </div>
-    </>
+      <ShareButton />
+      <FavoriteButton />
+      <StartButton />
+    </main>
   );
 }
-
-export default ComidaDetails;
