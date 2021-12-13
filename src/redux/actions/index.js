@@ -11,11 +11,14 @@ export const GET_EMAIL = 'GET_EMAIL';
 
 export const SET_MEALS = 'SET_MEALS';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
+export const SET_MEAL_OR_DRINK = 'SET_MEAL_OR_DRINK';
 
 export const actionLogin = (payload) => ({ type: GET_EMAIL, payload });
 
 export const actionMeals = (payload) => ({ type: SET_MEALS, payload });
 export const actionCategories = (payload) => ({ type: SET_CATEGORIES, payload });
+
+export const actionMealOrDrink = (payload) => ({ type: SET_MEAL_OR_DRINK, payload });
 
 export const actionFetchIngrediente = (type, page) => (dispatch) => (
   fetchIngrediente(type, page)
@@ -46,4 +49,4 @@ export const actionFetchList = (page) => (dispatch) => (
 
 export const actionFetchID = (id, page) => (dispatch) => (
   fetchID(id, page)
-    .then((response) => dispatch(actionMeals(response))));
+    .then((response) => dispatch(actionMealOrDrink(response))));
