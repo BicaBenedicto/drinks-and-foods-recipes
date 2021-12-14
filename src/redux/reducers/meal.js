@@ -1,6 +1,7 @@
-import { SET_CATEGORIES, SET_MEALS } from '../actions';
+import { SET_CATEGORIES, SET_MEALS, SET_MEAL_OR_DRINK } from '../actions';
 
 const INITIAL_STATE = {
+  item: {},
   list: [],
   categories: [],
 };
@@ -16,6 +17,11 @@ function meal(state = INITIAL_STATE, { type, payload }) {
     return ({
       ...state,
       list: payload,
+    });
+  case SET_MEAL_OR_DRINK:
+    return ({
+      ...state,
+      item: payload,
     });
   default:
     return state;
