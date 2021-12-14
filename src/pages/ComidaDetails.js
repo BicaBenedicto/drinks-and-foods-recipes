@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { actionFetchID, actionFetchName } from '../redux/actions';
 import Recomendation from '../components/Recomendation';
+import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
+import StartButton from '../components/StartButton';
 
-function ComidaDetails() {
+export default function ComidaDetails() {
   const disp = useDispatch();
   const { pathname } = useLocation();
   const [, PAGE, ID] = pathname.split('/');
@@ -21,19 +24,35 @@ function ComidaDetails() {
   });
 
   return (
-    <div>
+    <main>
       { loading ? <h1>Carregando...</h1>
         : (
           <>
-            <h1>detalhes da comida</h1>
             <div>
-              Empty
+              <img
+                data-testid="recipe-photo"
+                alt="imagem-da-comida"
+                width="100px"
+                height="100px"
+              />
+              <h1 data-testid="recipe-title">titulo da comida</h1>
+              <h4 data-testid="recipe-category">
+                categoria da comida
+              </h4>
+              <span data-testid="instructions">intruções</span>
+              <iframe
+                title="titulounico"
+                data-testid="video"
+                width="420"
+                height="345"
+              />
             </div>
+            <ShareButton />
+            <FavoriteButton />
             <Recomendation />
+            <StartButton />
           </>
         )}
-    </div>
+    </main>
   );
 }
-
-export default ComidaDetails;
