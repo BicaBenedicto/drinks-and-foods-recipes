@@ -4,7 +4,6 @@ import {
   fetchName,
   fetchCategory,
   fetchList,
-  fetchID,
 } from '../../services/fetchFood';
 
 export const GET_EMAIL = 'GET_EMAIL';
@@ -46,9 +45,3 @@ export const actionFetchCategory = (type, page) => (dispatch) => (
 export const actionFetchList = (page) => (dispatch) => (
   fetchList(page)
     .then((response) => dispatch(actionCategories(response))));
-
-export const actionFetchID = (id, page) => (dispatch) => {
-  const TYPE = (page === 'comidas' ? 'meals' : 'drinks');
-  return fetchID(id, page)
-    .then((response) => dispatch(actionMealOrDrink(response[TYPE][0])));
-};

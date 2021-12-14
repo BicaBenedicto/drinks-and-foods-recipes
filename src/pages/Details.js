@@ -1,25 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { actionFetchID, actionFetchName } from '../redux/actions';
+import { actionFetchName } from '../redux/actions';
 import Recomendation from '../components/Recomendation';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 import StartButton from '../components/StartButton';
 import IngredientsAndMeasure from '../components/IngredientsAndMeasure';
+import Context from '../services/Context';
 
 export default function Details() {
   const disp = useDispatch();
   const { pathname } = useLocation();
   const [, PAGE, ID] = pathname.split('/');
+  const { item, setItem, setIngredients, setMeasures } = useContext(Context);
 
   useEffect(() => {
-    disp(actionFetchID(ID, PAGE));
+    const renderByID = {
+      comidas: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
+      bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
+    };
+
+    async function fetchID() {
+      const response = await fetch(`${renderByID[PAGE.toLowerCase()]}${ID}`);
+      const results = await response.json();
+      const output = results.meals || results.drinks;
+      console.log(output[0]);
+      console.log(Object.entries(output[0]));
+
+      setItem(output[0]);
+      setIngredients(Object.entries(output[0])
+        .filter((i) => i[0].includes('strIngredient') && i[1]));
+      setMeasures(Object.entries(output[0])
+        .filter((i) => i[0].includes('strMeasure') && i[1] !== ' ' && i[1]));
+    }
+
+    fetchID();
     disp(actionFetchName('', (PAGE === 'comidas' ? 'bebidas' : 'comidas')));
   }, []);
 
   const [loading, hasLoading] = useState(true);
-  const { item, list } = useSelector((state) => state.meal);
+  const { list } = useSelector((state) => state.meal);
   const TYPE = (PAGE === 'comidas' ? 'Meal' : 'Drink');
 
   useEffect(() => {
@@ -44,7 +65,7 @@ export default function Details() {
             </h4>
             <IngredientsAndMeasure />
             <span data-testid="instructions">{ item.strInstructions }</span>
-            { item.meals && <iframe
+            { PAGE === 'comidas' && <iframe
               title={ item[`str${TYPE}`] }
               data-testid="video"
               src={ `https://www.youtube.com/embed/${item.strYoutube.split('=')[1]}` }

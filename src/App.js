@@ -25,6 +25,9 @@ function App() {
   const [searchFood, setSearchFood] = useState({ value: '', type: 'nome' });
   const [meals, setMeals] = useState({});
   const [categories, setCategories] = useState({});
+  const [item, setItem] = useState({});
+  const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
 
   const STORE_CONTEXT = {
     login,
@@ -35,6 +38,13 @@ function App() {
     setMeals,
     categories,
     setCategories,
+    item,
+    setItem,
+    ingredients,
+    setIngredients,
+    measures,
+    setMeasures,
+
   };
 
   return (
