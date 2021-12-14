@@ -47,6 +47,8 @@ export const actionFetchList = (page) => (dispatch) => (
   fetchList(page)
     .then((response) => dispatch(actionCategories(response))));
 
-export const actionFetchID = (id, page) => (dispatch) => (
-  fetchID(id, page)
-    .then((response) => dispatch(actionMealOrDrink(response))));
+export const actionFetchID = (id, page) => (dispatch) => {
+  const TYPE = (page === 'comidas' ? 'meals' : 'drinks');
+  return fetchID(id, page)
+    .then((response) => dispatch(actionMealOrDrink(response[TYPE][0])));
+};

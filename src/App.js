@@ -8,8 +8,6 @@ import Context from './services/Context';
 import store from './redux/store/index';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
-import ComidaDetails from './pages/ComidaDetails';
-import BebidaDetails from './pages/BebidaDetails';
 import ComidaInProgress from './pages/ComidaInProgress';
 import BebidaInProgress from './pages/BebidaInProgress';
 import Explorar from './pages/Explorar';
@@ -20,6 +18,7 @@ import ExplorarComidasArea from './pages/ExplorarComidasArea';
 import Perfil from './pages/Perfil';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
+import Details from './pages/Details';
 
 function App() {
   const [login, changeLogin] = useState({ email: '', password: '' });
@@ -45,8 +44,8 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route path="/comidas/:id/in-progress" component={ ComidaInProgress } />
           <Route path="/bebidas/:id/in-progress" component={ BebidaInProgress } />
-          <Route path="/comidas/:id" component={ ComidaDetails } />
-          <Route path="/bebidas/:id" component={ BebidaDetails } />
+          <Route path="/comidas/:id" component={ Details } />
+          <Route path="/bebidas/:id" component={ Details } />
           <Route path="/comidas" component={ Comidas } />
           <Route path="/bebidas" component={ Bebidas } />
           <Route path="/explorar/comidas/area" component={ ExplorarComidasArea } />

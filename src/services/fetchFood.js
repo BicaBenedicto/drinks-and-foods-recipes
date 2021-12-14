@@ -66,7 +66,6 @@ async function fetchID(id, page) {
   const { renderByID } = URL;
   const response = await fetch(`${renderByID[page.toLowerCase()]}${id}`);
   const results = await response.json();
-  console.log(results);
   return results;
 }
 
