@@ -1,7 +1,7 @@
 .recomendation {
   display: flex;
-  width: 350px;
   overflow: scroll;
+  width: 350px;
 }
 
 .recomendation-item {
