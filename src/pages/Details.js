@@ -24,15 +24,14 @@ export default function Details() {
     async function fetchID() {
       const response = await fetch(`${renderByID[PAGE.toLowerCase()]}${ID}`);
       const results = await response.json();
-      const output = results.meals || results.drinks;
-      console.log(output[0]);
-      console.log(Object.entries(output[0]));
+      const [output] = results.meals || results.drinks;
 
-      setItem(output[0]);
-      setIngredients(Object.entries(output[0])
-        .filter((i) => i[0].includes('strIngredient') && i[1]));
-      setMeasures(Object.entries(output[0])
-        .filter((i) => i[0].includes('strMeasure') && i[1] !== ' ' && i[1]));
+      setItem(output);
+      setIngredients(Object.entries(output)
+        .filter((i) => i[0].includes('strIngredient') && i[1]).map((i) => i[1]));
+      setMeasures(Object.entries(output)
+        .filter((i) => i[0].includes('strMeasure') && i[1] !== ' ' && i[1])
+        .map((i) => i[1]));
     }
 
     fetchID();
@@ -65,7 +64,7 @@ export default function Details() {
             </h4>
             <IngredientsAndMeasure />
             <span data-testid="instructions">{ item.strInstructions }</span>
-            { PAGE === 'comidas' && <iframe
+            { (PAGE === 'comidas' && item.strYoutube) && <iframe
               title={ item[`str${TYPE}`] }
               data-testid="video"
               src={ `https://www.youtube.com/embed/${item.strYoutube.split('=')[1]}` }

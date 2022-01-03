@@ -4,11 +4,9 @@ import renderWithRouter from './renderWithRouter';
 import renderWithRedux from './renderWithRedux';
 import App from '../App';
 import Comidas from '../pages/Comidas';
-import ComidaDetails from '../pages/ComidaDetails';
 import Bebidas from '../pages/Bebidas';
-import BebidaDetails from '../pages/BebidaDetails';
-import ComidaInProgress from '../pages/ComidaInProgress';
-import BebidaInProgress from '../pages/BebidaInProgress';
+import Details from '../pages/Details';
+import InProgress from '../pages/InProgress';
 import Explorar from '../pages/Explorar';
 import ExplorarComidas from '../pages/ExplorarComidas';
 import ExplorarBebidas from '../pages/ExplorarBebidas';
@@ -63,7 +61,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida detalhadas', () => {
-    renderWithRouter(<ComidaDetails />);
+    renderWithRouter(<Details />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -71,7 +69,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida em progesso', () => {
-    renderWithRouter(<ComidaInProgress />);
+    renderWithRouter(<InProgress />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -87,7 +85,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de Bebidas detalhadas', () => {
-    renderWithRouter(<BebidaDetails />);
+    renderWithRouter(<Details />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebida', false);
     searchIconTest(false);
@@ -95,7 +93,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de Bebida em progesso', () => {
-    renderWithRouter(<BebidaInProgress />);
+    renderWithRouter(<InProgress />);
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebida', false);
     searchIconTest(false);

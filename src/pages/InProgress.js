@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ComidaInProgress() {
+function InProgress() {
   return (
     <>
-      <h1>comida em progesso</h1>
+      <h1>comida ou bebida em progesso</h1>
       <div>
         Empty
       </div>
@@ -11,4 +11,4 @@ function ComidaInProgress() {
   );
 }
 
-export default ComidaInProgress;
+export default InProgress;

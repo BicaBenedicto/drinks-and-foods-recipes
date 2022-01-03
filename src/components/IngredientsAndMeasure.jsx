@@ -11,12 +11,12 @@ export default function IngredientsAndMeasure() {
       <h2>Ingredientes</h2>
       {ingredients.map((ingredient, index) => (
         <li
-          key="index"
+          key={ index }
           data-testid={ `${index}-ingredient-name-and-measure` }
         >
           {`${(measures[index]
-            ? measures[index][1]
-            : measures[0][1])}${ingredient[1]}`}
+            ? measures[index]
+            : measures[0])} ${ingredient}`}
         </li>
       ))}
     </ol>

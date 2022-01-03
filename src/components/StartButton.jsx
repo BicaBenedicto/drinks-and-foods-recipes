@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 
 export default function StartButton() {
@@ -6,6 +5,8 @@ export default function StartButton() {
     <button
       data-testid="start-recipe-btn"
       type="button"
-    />
+    >
+      Start
+    </button>
   );
 }

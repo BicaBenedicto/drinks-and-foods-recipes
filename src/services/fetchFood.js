@@ -19,6 +19,10 @@ const URL = {
     comidas: 'https://www.themealdb.com/api/json/v1/1/list.php?c=list',
     bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
   },
+  renderByID: {
+    comidas: 'www.themealdb.com/api/json/v1/1/lookup.php?i=',
+    bebidas: 'www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
+  },
 };
 
 async function fetchIngrediente(ingrediente, page) {
@@ -58,10 +62,18 @@ async function fetchList(page) {
   return results.meals || results.drinks;
 }
 
+async function fetchID(id, page) {
+  const { renderByID } = URL;
+  const response = await fetch(`${renderByID[page.toLowerCase()]}${id}`);
+  const results = await response.json();
+  return results.meals || results.drinks;
+}
+
 export {
   fetchIngrediente,
   fetchName,
   fetchFirstLetter,
   fetchCategory,
   fetchList,
+  fetchID,
 };
