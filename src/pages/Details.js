@@ -25,6 +25,7 @@ export default function Details() {
       const response = await fetch(`${renderByID[PAGE.toLowerCase()]}${ID}`);
       const results = await response.json();
       const [output] = results.meals || results.drinks;
+      localStorage.setItem('itemRecipe', JSON.stringify(output));
 
       setItem(output);
       setIngredients(Object.entries(output)
