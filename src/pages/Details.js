@@ -14,6 +14,7 @@ export default function Details() {
   const { pathname } = useLocation();
   const [, PAGE, ID] = pathname.split('/');
   const { item, setItem, setIngredients, setMeasures } = useContext(Context);
+  const [hasDone, toggleHasDone] = useState(false);
 
   useEffect(() => {
     const renderByID = {
@@ -37,6 +38,8 @@ export default function Details() {
 
     fetchID();
     disp(actionFetchName('', (PAGE === 'comidas' ? 'bebidas' : 'comidas')));
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes) toggleHasDone(true);
   }, []);
 
   const [loading, hasLoading] = useState(true);
@@ -52,6 +55,7 @@ export default function Details() {
       { loading ? <h1>Carregando...</h1>
         : (
           <>
+            <FavoriteButton />
             <img
               data-testid="recipe-photo"
               src={ item[`str${TYPE}Thumb`] }
@@ -74,12 +78,10 @@ export default function Details() {
             /> }
             <Recomendation />
             <ShareButton />
-            <FavoriteButton />
-            <StartButton
-              // page={ type }
-              idReceita={ `id${TYPE}` }
-              // storageType={ storageType }
-            />
+            {!hasDone && <StartButton
+              page={ PAGE }
+              id={ item[`id${TYPE}`] }
+            />}
           </>
         )}
       ;

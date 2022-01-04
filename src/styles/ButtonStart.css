@@ -1,0 +1,9 @@
+.start-recipe {
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+}
