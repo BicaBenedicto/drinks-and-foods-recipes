@@ -24,7 +24,7 @@ export default function FavoriteButton() {
       type: (item.idMeal ? 'comida' : 'bebida'),
       area: item.strArea || '',
       category: item.strCategory,
-      alcolohicOrNot: item.strAlcoholic || '',
+      alcoholicOrNot: item.strAlcoholic || '',
       name: item.strMeal || item.strDrink,
       image: item.strMealThumb || item.strDrinkThumb,
     };
