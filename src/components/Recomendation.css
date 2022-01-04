@@ -1,0 +1,16 @@
+.recomendation {
+  display: flex;
+  overflow: scroll;
+  width: 350px;
+}
+
+.recomendation-item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.recomendation-item img {
+  height: 250px;
+  width: 250px;
+}
