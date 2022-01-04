@@ -4,6 +4,21 @@ import heartEmpty from '../images/whiteHeartIcon.svg';
 import heartFull from '../images/blackHeartIcon.svg';
 import Context from '../services/Context';
 
+const verifyFavorite = (favoriteItem, ITEM, id) => {
+  if (favoriteItem) {
+    if (favoriteItem
+      .some((favorite) => Number(id) === Number(favorite.id))) {
+      const newFavorites = favoriteItem
+        .filter((favorite) => Number(favorite.id) !== Number(id));
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteItem, ITEM]));
+    }
+  } else {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([ITEM]));
+  }
+};
+
 export default function FavoriteButton() {
   const [hasFavorite, changeFavorite] = useState(false);
   const { item } = useContext(Context);
@@ -30,18 +45,7 @@ export default function FavoriteButton() {
     };
 
     changeFavorite(!hasFavorite);
-    if (favoriteItem) {
-      if (favoriteItem
-        .some((favorite) => Number(id) === Number(favorite.id))) {
-        const newFavorites = favoriteItem
-          .filter((favorite) => Number(favorite.id) !== Number(id));
-        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteItem, ITEM]));
-      }
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([ITEM]));
-    }
+    verifyFavorite(favoriteItem, ITEM, id);
   };
 
   return (
