@@ -27,6 +27,8 @@ function App() {
   const [item, setItem] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [measures, setMeasures] = useState([]);
+  const [recipesInProgress, addRecipeInProgress] = useState({ cocktails: {}, meals: {} });
+  const [actualIngredients, setActualIngredients] = useState([]);
 
   const STORE_CONTEXT = {
     login,
@@ -43,7 +45,12 @@ function App() {
     setIngredients,
     measures,
     setMeasures,
-
+    inProgressRecipes: {
+      actualIngredients,
+      setActualIngredients,
+      recipesInProgress,
+      addRecipeInProgress,
+    },
   };
 
   return (

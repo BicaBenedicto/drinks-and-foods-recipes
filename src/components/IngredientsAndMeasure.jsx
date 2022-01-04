@@ -1,10 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Context from '../services/Context';
 
 export default function IngredientsAndMeasure() {
-  const { ingredients, measures } = useContext(Context);
-  console.log(ingredients);
-  console.log(measures);
+  const { ingredients, measures, inProgressRecipes } = useContext(Context);
+  const { setActualIngredients } = inProgressRecipes;
+
+  useEffect(() => {
+    setActualIngredients(ingredients.map((ingredient, index) => `${(measures[index]
+      ? measures[index]
+      : measures[0])} ${ingredient}`));
+  }, []);
 
   return (
     <ol>
