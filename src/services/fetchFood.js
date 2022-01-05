@@ -23,6 +23,10 @@ const URL = {
     comidas: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
     bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
   },
+  renderByRandom: {
+    comidas: 'https://www.themealdb.com/api/json/v1/1/random.php',
+    bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/random.php',
+  },
 };
 
 async function fetchIngrediente(ingrediente, page) {
@@ -69,6 +73,13 @@ async function fetchID(id, page) {
   return results.meals || results.drinks;
 }
 
+async function fetchRandom(pageType) {
+  const { renderByRandom } = URL;
+  const response = await fetch(renderByRandom[pageType]);
+  const results = await response.json();
+  return results.meals || results.drinks;
+}
+
 export {
   fetchIngrediente,
   fetchName,
@@ -76,4 +87,5 @@ export {
   fetchCategory,
   fetchList,
   fetchID,
+  fetchRandom,
 };
