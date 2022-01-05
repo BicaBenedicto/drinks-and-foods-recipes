@@ -10,9 +10,8 @@ import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import InProgress from './pages/InProgress';
 import Explorar from './pages/Explorar';
-import ExplorarBebidas from './pages/ExplorarBebidas';
+import ExplorarBebidasOuComidas from './pages/ExplorarBebidasOuComidas';
 import ExplorarIngredientes from './pages/ExplorarIngredientes';
-import ExplorarComidas from './pages/ExplorarComidas';
 import ExplorarComidasArea from './pages/ExplorarComidasArea';
 import Perfil from './pages/Perfil';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
@@ -79,8 +78,8 @@ function App() {
             path="/explorar/comidas/ingredientes"
             component={ ExplorarIngredientes }
           />
-          <Route path="/explorar/bebidas" component={ ExplorarBebidas } />
-          <Route path="/explorar/comidas" component={ ExplorarComidas } />
+          <Route path="/explorar/bebidas" component={ ExplorarBebidasOuComidas } />
+          <Route path="/explorar/comidas" component={ ExplorarBebidasOuComidas } />
           <Route path="/explorar" component={ Explorar } />
           <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
