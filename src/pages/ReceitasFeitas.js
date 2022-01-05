@@ -5,31 +5,27 @@ import ShareButton from '../components/ShareButton';
 
 function ReceeitasFeitas() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  // const doneRecipes = [{
-  //   id: '52977',
-  //   type: 'comidas',
-  //   area: ' area-da-receita-ou-texto-vazio',
-  //   category: 'asdasd',
-  //   alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-  //   name: 'nome-da-receita',
-  //   image: 'imagem-da-receita',
-  //   doneDate: 'quando-a-receita-foi-concluida',
-  //   tags: ['0', '1'],
-  // },
-  // {
-  //   id: '52977',
-  //   type: 'bebidas',
-  //   area: ' area-da-receita-ou-texto-vazio',
-  //   category: 'asdasd',
-  //   alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-  //   name: 'nome-da-receita',
-  //   image: 'imagem-da-receita',
-  //   doneDate: 'quando-a-receita-foi-concluida',
-  //   tags: ['0', '1'],
-  // },
-  // ];
-
   const [categories, setCategories] = useState('All');
+
+  function category(recipe, index) {
+    console.log(recipe);
+    if (recipe.type === 'comida') {
+      return (
+        <p
+          className="categories-text"
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          { `${recipe.area} - ${recipe.category}` }
+        </p>);
+    }
+    return (
+      <p
+        className="categories-text"
+        data-testid={ `${index}-horizontal-top-text` }
+      >
+        { `${recipe.alcoholicOrNot} - ${recipe.category}`}
+      </p>);
+  }
 
   return (
     <>
@@ -46,7 +42,7 @@ function ReceeitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ () => setCategories('comidas') }
+          onClick={ () => setCategories('comida') }
         >
           Food
 
@@ -54,12 +50,11 @@ function ReceeitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ () => setCategories('bebidas') }
+          onClick={ () => setCategories('bebida') }
         >
           Drinks
 
         </button>
-        {/* <div> */}
         { doneRecipes.filter((recipe) => {
           if (categories === 'All') return recipe;
           if (recipe.type === categories) return recipe;
@@ -69,7 +64,7 @@ function ReceeitasFeitas() {
             <Link
               className="card"
               key={ recipe.id }
-              to={ (recipe.type === 'comidas'
+              to={ (recipe.type === 'comida'
                 ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
             >
               <img
@@ -78,17 +73,11 @@ function ReceeitasFeitas() {
                 alt={ recipe.name }
               />
             </Link>
-            <p
-              className="categories-text"
-              data-testid={ `${index}-horizontal-top-text` }
-            >
-              { recipe.category }
-
-            </p>
+            {category(recipe, index)}
             <Link
               className="card"
               key={ recipe.id }
-              to={ (recipe.type === 'comidas'
+              to={ (recipe.type === 'comida'
                 ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
             >
               <p
@@ -118,9 +107,8 @@ function ReceeitasFeitas() {
               ))}
             </div>
             <ShareButton
-              url={ (recipe.type === 'comidas'
-                ? `
-                http://localhost:3000/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+              url={ (recipe.type === 'comida'
+                ? `http://localhost:3000/comidas/${recipe.id}` : `http://localhost:3000/bebidas/${recipe.id}`) }
               index={ index }
             />
           </div>

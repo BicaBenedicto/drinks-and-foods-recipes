@@ -19,10 +19,11 @@ function ShareButton({ url, index }) {
     <div>
       <button
         type="button"
-        data-testid={ id }
         onClick={ copyCodeToClipboar }
       >
-        { hasCoppied ? 'Link copiado!' : <img src={ shareIcon } alt="share icon" /> }
+        { hasCoppied
+          ? 'Link copiado!'
+          : <img data-testid={ id } src={ shareIcon } alt="share icon" /> }
       </button>
     </div>
   );
