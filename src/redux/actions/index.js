@@ -49,5 +49,5 @@ export const actionFetchList = (page) => (dispatch) => (
 
 export const actionFetchID = (type, page) => (dispatch) => (
   fetchID(type, page)
-    .then((response) => dispatch(actionMeals(response)))
+    .then((response) => dispatch(actionMealOrDrink(response)))
 );
