@@ -4,6 +4,12 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 
+function renderUrl(type, id) {
+  const URL = window.location.href.replace('/receitas-feitas', '');
+  const TYPE = `${type}s`;
+  return `${URL}/${TYPE}/${id}`;
+}
+
 function ReceitasFeitas() {
   const [categories, setCategories] = useState('All');
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -23,51 +29,48 @@ function ReceitasFeitas() {
           onClick={ () => setCategories('All') }
         >
           All
-
         </button>
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ () => setCategories('comidas') }
+          onClick={ () => setCategories('comida') }
         >
           Food
-
         </button>
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ () => setCategories('bebidas') }
+          onClick={ () => setCategories('bebida') }
         >
           Drinks
-
         </button>
         { hasDoneRecipes
           ? doneRecipes.filter((recipe) => {
-            if (categories === 'All') return true;
-            if (recipe.type === categories) return true;
+            if (categories === 'All' || recipe.type === categories) return true;
             return false;
           }).map((recipe, index) => (
             <div key={ recipe.id }>
               <Link
                 className="card"
-                to={ (recipe.type === 'comidas'
+                to={ (recipe.type === 'comida'
                   ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
               >
                 <img
                   data-testid={ `${index}-horizontal-image` }
                   src={ recipe.image }
                   alt={ recipe.name }
+                  className="horizontal-image"
                 />
               </Link>
               <p
                 className="categories-text"
                 data-testid={ `${index}-horizontal-top-text` }
               >
-                { recipe.category }
+                { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
               </p>
               <Link
                 className="card"
-                to={ (recipe.type === 'comidas'
+                to={ (recipe.type === 'comida'
                   ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
               >
                 <p
@@ -95,6 +98,7 @@ function ReceitasFeitas() {
               </div>
               <ShareButton
                 index={ index }
+                url={ renderUrl(recipe.type, recipe.id) }
               />
             </div>
           ))

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-function ShareButton({ index }) {
+function ShareButton({ index, url }) {
   const [hasCoppied, toggleHasCoppied] = useState(false);
   const id = index >= 0 ? `${index}-horizontal-share-btn` : 'share-btn';
   const copyCodeToClipboar = () => {
     const URL = window.location.href.replace('/in-progress', '');
-    navigator.clipboard.writeText(URL);
+    const URL2 = !url ? URL : url;
+    navigator.clipboard.writeText(URL2);
     toggleHasCoppied(true);
   };
 
@@ -15,10 +16,11 @@ function ShareButton({ index }) {
     <div>
       <button
         type="button"
-        data-testid={ id }
         onClick={ copyCodeToClipboar }
       >
-        { hasCoppied ? 'Link copiado!' : <img src={ shareIcon } alt="share icon" /> }
+        { hasCoppied
+          ? 'Link copiado!'
+          : <img data-testid={ id } src={ shareIcon } alt="share icon" /> }
       </button>
     </div>
   );
@@ -26,6 +28,11 @@ function ShareButton({ index }) {
 
 ShareButton.propTypes = {
   index: PropTypes.string.isRequired,
+  url: PropTypes.string,
+};
+
+ShareButton.defaultProps = {
+  url: '',
 };
 
 export default ShareButton;

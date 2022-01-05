@@ -47,8 +47,8 @@ function setLocalStorage(items, idRecipe, type) {
   const { food } = items;
   console.log(food);
   const saveLocal = {
-    id: idRecipe,
-    type,
+    id: food.idMeal || food.idDrink,
+    type: type.replace('s', ''),
     area: food.strArea || '',
     category: food.strCategory || '',
     alcoholicOrNot: food.strAlcoholic || '',
