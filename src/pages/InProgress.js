@@ -13,6 +13,7 @@ function InProgress() {
   const ingredients = JSON.parse(ingredientsJSON);
   const TYPE = (PAGE === 'comidas' ? 'Meal' : 'Drink');
   const TYPE2 = (PAGE === 'comidas' ? 'meals' : 'cocktails');
+  console.log(ingredients[TYPE2]);
   return (
     <>
       <ShareButton />
@@ -27,7 +28,7 @@ function InProgress() {
       />
       <p data-testid="recipe-category">{ item.strCategory }</p>
       <ol>
-        {ingredients[TYPE2].ID.map((ingredient, index) => (
+        {ingredients[TYPE2][ID].map((ingredient, index) => (
           <li key={ index } data-testid={ `${index}-ingredient-step` }>{ ingredient }</li>
         ))}
       </ol>
