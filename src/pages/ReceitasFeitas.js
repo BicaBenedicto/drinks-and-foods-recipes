@@ -87,14 +87,11 @@ function ReceitasFeitas() {
                 { recipe.doneDate }
               </p>
               <div>
-                {recipe.tags.map((tag) => (
-                  <p
-                    key={ tag }
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                  >
-                    {tag}
-                  </p>
-                ))}
+                <p
+                  data-testid={ `${index}-${recipe.tags}-horizontal-tag` }
+                >
+                  {recipe.tags}
+                </p>
               </div>
               <ShareButton
                 index={ index }
