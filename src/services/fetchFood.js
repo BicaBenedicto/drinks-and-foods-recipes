@@ -20,8 +20,8 @@ const URL = {
     bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list',
   },
   renderByID: {
-    comidas: 'www.themealdb.com/api/json/v1/1/lookup.php?i=',
-    bebidas: 'www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
+    comidas: 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=',
+    bebidas: 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=',
   },
 };
 
