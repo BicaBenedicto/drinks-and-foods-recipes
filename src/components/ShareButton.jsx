@@ -4,9 +4,11 @@ import shareIcon from '../images/shareIcon.svg';
 
 function ShareButton({ url, index }) {
   const [hasCoppied, toggleHasCoppied] = useState(false);
-
+  console.log(index);
+  const id = index >= 0 ? `${index}-horizontal-share-btn` : 'share-btn';
   const copyCodeToClipboar = () => {
     if (url) {
+      toggleHasCoppied(true);
       return navigator.clipboard.writeText(url);
     }
     navigator.clipboard.writeText(window.location.href);
@@ -17,12 +19,11 @@ function ShareButton({ url, index }) {
     <div>
       <button
         type="button"
-        data-testid={ (index ? `${index}-horizontal-share-btn` : 'share-btn') }
+        data-testid={ id }
         onClick={ copyCodeToClipboar }
       >
         { hasCoppied ? 'Link copiado!' : <img src={ shareIcon } alt="share icon" /> }
       </button>
-      )
     </div>
   );
 }

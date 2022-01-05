@@ -4,73 +4,62 @@ import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 
 function ReceeitasFeitas() {
-  // const  = localStorage.getItem('')
-  const doneRecipes = [{
-    id: '52977',
-    type: 'comidas',
-    area: ' area-da-receita-ou-texto-vazio',
-    category: 'asdasd',
-    alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
-    name: 'nome-da-receita',
-    image: 'imagem-da-receita',
-    doneDate: 'quando-a-receita-foi-concluida',
-    tags: ['0', '1'],
-  }];
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  // const doneRecipes = [{
+  //   id: '52977',
+  //   type: 'comidas',
+  //   area: ' area-da-receita-ou-texto-vazio',
+  //   category: 'asdasd',
+  //   alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
+  //   name: 'nome-da-receita',
+  //   image: 'imagem-da-receita',
+  //   doneDate: 'quando-a-receita-foi-concluida',
+  //   tags: ['0', '1'],
+  // },
+  // {
+  //   id: '52977',
+  //   type: 'bebidas',
+  //   area: ' area-da-receita-ou-texto-vazio',
+  //   category: 'asdasd',
+  //   alcoholicOrNot: 'alcoholic-ou-non-alcoholic-ou-texto-vazio',
+  //   name: 'nome-da-receita',
+  //   image: 'imagem-da-receita',
+  //   doneDate: 'quando-a-receita-foi-concluida',
+  //   tags: ['0', '1'],
+  // },
+  // ];
 
   const [categories, setCategories] = useState('All');
-
-  function filterCategories({ target }) {
-    const checkboxes = document.querySelectorAll('input[type=checkbox]');
-    checkboxes.forEach((checkbox) => {
-      if (target.id !== checkbox.id) {
-        checkbox.checked = false;
-      }
-      setCategories(target.value);
-    });
-  }
 
   return (
     <>
       <Header pageTitle="Receitas Feitas" />
       <div>
-        <label htmlFor="All">
-          <input
-            className="all-categorie"
-            data-testid="filter-by-all-btn"
-            id="All"
-            type="checkbox"
-            name="category"
-            value="All"
-            onClick={ filterCategories }
-          />
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setCategories('All') }
+        >
           All
-        </label>
-        <label htmlFor="Food">
-          <input
-            className="food-categorie"
-            data-testid="filter-by-food-btn"
-            id="Food"
-            type="checkbox"
-            name="category"
-            value="comidas"
-            onClick={ filterCategories }
-          />
+
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => setCategories('comidas') }
+        >
           Food
-        </label>
-        <label htmlFor="Drinks">
-          <input
-            className="drinks-categorie"
-            data-testid="filter-by-drink-btn"
-            id="Drinks"
-            type="checkbox"
-            name="category"
-            value="bebidas"
-            onClick={ filterCategories }
-          />
+
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => setCategories('bebidas') }
+        >
           Drinks
-        </label>
-      </div>
-      <div>
+
+        </button>
+        {/* <div> */}
         { doneRecipes.filter((recipe) => {
           if (categories === 'All') return recipe;
           if (recipe.type === categories) return recipe;
@@ -79,9 +68,9 @@ function ReceeitasFeitas() {
           <div key={ recipe.id }>
             <Link
               className="card"
-              data-testid={ `${index}-recipe-card` }
               key={ recipe.id }
-              to={ `/comidas/${recipe.id}` }
+              to={ (recipe.type === 'comidas'
+                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
             >
               <img
                 data-testid={ `${index}-horizontal-image` }
@@ -98,9 +87,9 @@ function ReceeitasFeitas() {
             </p>
             <Link
               className="card"
-              data-testid={ `${index}-recipe-card` }
               key={ recipe.id }
-              to={ `/comidas/${recipe.id}` }
+              to={ (recipe.type === 'comidas'
+                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
             >
               <p
                 className="recipes-text"
@@ -130,7 +119,8 @@ function ReceeitasFeitas() {
             </div>
             <ShareButton
               url={ (recipe.type === 'comidas'
-                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+                ? `
+                http://localhost:3000/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
               index={ index }
             />
           </div>
