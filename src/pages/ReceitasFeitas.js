@@ -1,31 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 
-function ReceeitasFeitas() {
-  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  const [categories, setCategories] = useState('All');
+function renderUrl(type, id) {
+  const URL = window.location.href.replace('/receitas-feitas', '');
+  const TYPE = `${type}s`;
+  return `${URL}/${TYPE}/${id}`;
+}
 
-  function category(recipe, index) {
-    console.log(recipe);
-    if (recipe.type === 'comida') {
-      return (
-        <p
-          className="categories-text"
-          data-testid={ `${index}-horizontal-top-text` }
-        >
-          { `${recipe.area} - ${recipe.category}` }
-        </p>);
-    }
-    return (
-      <p
-        className="categories-text"
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        { `${recipe.alcoholicOrNot} - ${recipe.category}`}
-      </p>);
-  }
+function ReceitasFeitas() {
+  const [categories, setCategories] = useState('All');
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  const [hasDoneRecipes, toggleHasDoneRecipes] = useState(false);
+
+  useEffect(() => {
+    if (doneRecipes) toggleHasDoneRecipes(true);
+  }, []);
 
   return (
     <>
@@ -37,7 +29,6 @@ function ReceeitasFeitas() {
           onClick={ () => setCategories('All') }
         >
           All
-
         </button>
         <button
           type="button"
@@ -45,7 +36,6 @@ function ReceeitasFeitas() {
           onClick={ () => setCategories('comida') }
         >
           Food
-
         </button>
         <button
           type="button"
@@ -53,69 +43,69 @@ function ReceeitasFeitas() {
           onClick={ () => setCategories('bebida') }
         >
           Drinks
-
         </button>
-        { doneRecipes.filter((recipe) => {
-          if (categories === 'All') return recipe;
-          if (recipe.type === categories) return recipe;
-          return null;
-        }).map((recipe, index) => (
-          <div key={ recipe.id }>
-            <Link
-              className="card"
-              key={ recipe.id }
-              to={ (recipe.type === 'comida'
-                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-            >
-              <img
-                data-testid={ `${index}-horizontal-image` }
-                src={ recipe.image }
-                alt={ recipe.name }
-              />
-            </Link>
-            {category(recipe, index)}
-            <Link
-              className="card"
-              key={ recipe.id }
-              to={ (recipe.type === 'comida'
-                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-            >
-              <p
-                className="recipes-text"
-                data-testid={ `${index}-horizontal-name` }
+        { hasDoneRecipes
+          ? doneRecipes.filter((recipe) => {
+            if (categories === 'All' || recipe.type === categories) return true;
+            return false;
+          }).map((recipe, index) => (
+            <div key={ recipe.id }>
+              <Link
+                className="card"
+                to={ (recipe.type === 'comida'
+                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
               >
-                { recipe.name }
-
+                <img
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ recipe.image }
+                  alt={ recipe.name }
+                  className="horizontal-image"
+                />
+              </Link>
+              <p
+                className="categories-text"
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
               </p>
-            </Link>
-            <p
-              className="date"
-              data-testid={ `${index}-horizontal-done-date` }
-            >
-              { recipe.doneDate }
-
-            </p>
-            <div>
-              {recipe.tags.map((tag) => (
+              <Link
+                className="card"
+                to={ (recipe.type === 'comida'
+                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+              >
                 <p
-                  key={ tag }
-                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                  className="recipes-text"
+                  data-testid={ `${index}-horizontal-name` }
                 >
-                  {tag}
-
+                  { recipe.name }
                 </p>
-              ))}
+              </Link>
+              <p
+                className="date"
+                data-testid={ `${index}-horizontal-done-date` }
+              >
+                { recipe.doneDate }
+              </p>
+              <div>
+                {recipe.tags.map((tag) => (
+                  <p
+                    key={ tag }
+                    data-testid={ `${index}-${tag}-horizontal-tag` }
+                  >
+                    {tag}
+                  </p>
+                ))}
+              </div>
+              <ShareButton
+                index={ index }
+                url={ renderUrl(recipe.type, recipe.id) }
+              />
             </div>
-            <ShareButton
-              url={ (recipe.type === 'comida'
-                ? `http://localhost:3000/comidas/${recipe.id}` : `http://localhost:3000/bebidas/${recipe.id}`) }
-              index={ index }
-            />
-          </div>
-        ))}
+          ))
+          : <h1>Você não tem receitas feitas ainda!</h1>}
       </div>
     </>
   );
 }
 
-export default ReceeitasFeitas;
+export default ReceitasFeitas;

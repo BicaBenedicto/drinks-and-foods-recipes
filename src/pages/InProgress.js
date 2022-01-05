@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useLocation, Link } from 'react-router-dom';
 import '../styles/in-progress.css';
+import { useDispatch, useSelector } from 'react-redux';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
+import Context from '../services/Context';
+import { actionFetchID } from '../redux/actions';
 
 function loadLocalStorage(setSavedRecipe) {
   if (localStorage.inProgressRecipes) {
@@ -12,20 +15,20 @@ function loadLocalStorage(setSavedRecipe) {
 }
 
 function handleClick({ target }, items, newItems) {
-  const { data, foodType } = items;
+  const { food } = items;
   const { savedRecipe, recipe, idRecipe, setSavedRecipe } = newItems;
   if (target.checked) {
     target.parentNode.className = 'riscado';
-    if (!savedRecipe[recipe][data[foodType][0][idRecipe]]) {
+    if (!savedRecipe[recipe][food[idRecipe]]) {
       setSavedRecipe({
         ...savedRecipe,
-        [recipe]: { [data[foodType][0][idRecipe]]: [target.name] },
+        [recipe]: { [food[idRecipe]]: [target.name] },
       });
     } else {
       setSavedRecipe({
         ...savedRecipe,
-        [recipe]: { [data[foodType][0][idRecipe]]: [
-          ...savedRecipe[recipe][data[foodType][0][idRecipe]],
+        [recipe]: { [food[idRecipe]]: [
+          ...savedRecipe[recipe][food[idRecipe]],
           target.name] },
       });
     }
@@ -33,26 +36,28 @@ function handleClick({ target }, items, newItems) {
     target.parentNode.className = '';
     setSavedRecipe({
       ...savedRecipe,
-      [recipe]: { [data[foodType][0][idRecipe]]: [
-        ...savedRecipe[recipe][data[foodType][0][idRecipe]]
+      [recipe]: { [food[idRecipe]]: [
+        ...savedRecipe[recipe][food[idRecipe]]
           .filter((value) => value !== target.name)] },
     });
   }
 }
 
 function setLocalStorage(items, idRecipe, type) {
-  const { data, foodType } = items;
+  const { food } = items;
+  console.log(food);
   const saveLocal = {
-    id: idRecipe,
-    type,
-    area: data[foodType][0].strArea || '',
-    category: data[foodType][0].strCategory || '',
-    alcoholicOrNot: data[foodType][0].strAlcoholic || '',
-    name: data[foodType][0].strMeal || data[foodType][0].strDrink,
-    image: data[foodType][0].strMealThumb || data[foodType][0].strDrinkThumb,
+    id: food.idMeal || food.idDrink,
+    type: type.replace('s', ''),
+    area: food.strArea || '',
+    category: food.strCategory || '',
+    alcoholicOrNot: food.strAlcoholic || '',
+    name: food.strMeal || food.strDrink,
+    image: food.strMealThumb || food.strDrinkThumb,
     doneDate: new Date().toLocaleDateString('PT-BR'),
-    tags: [data[foodType][0].strTags] || [],
+    tags: [food.strTags] || [],
   };
+
   if (!localStorage.doneRecipes) {
     localStorage.setItem('doneRecipes', JSON.stringify([saveLocal]));
   } else {
@@ -63,34 +68,31 @@ function setLocalStorage(items, idRecipe, type) {
 }
 
 export default function FoodsInProgress() {
-  const [data, setData] = useState({});
-  const idReceita = window.location.pathname.split('/')[2];
+  const disp = useDispatch();
+  const { pathname } = useLocation();
+  const [, page, idReceita] = pathname.split('/');
+  const { setItem } = useContext(Context);
   const [savedRecipe, setSavedRecipe] = useState({
     cocktails: {},
     meals: {},
   });
+  const data = useSelector((s) => s.meal.item);
+
   const [checkIngredients, setCheckIngredients] = useState(null);
-  let foodType = 'meals';
-  let recipe = 'meals';
-  let type = 'comidas';
-  let idRecipe = 'idMeal';
-
-  if (window.location.pathname.split('/')[1] === 'bebidas') {
-    foodType = 'drinks';
-    recipe = 'cocktails';
-    type = 'bebidas';
-    idRecipe = 'idDrink';
-  }
-
-  const fetchComidas = (endPointFetch, setState) => {
-    fetch(endPointFetch)
-      .then((resolve) => resolve.json())
-      .then((response) => setState(response));
+  const TYPE = (page === 'bebidas');
+  const foodOrDrinkTypes = {
+    foodType: TYPE ? 'drinks' : 'meals',
+    recipe: TYPE ? 'cocktails' : 'meals',
+    type: TYPE ? 'bebidas' : 'comidas',
+    idRecipe: TYPE ? 'idDrink' : 'idMeal',
+    strType: TYPE ? 'strDrink' : 'strMeal',
   };
+  const { foodType, recipe, type, idRecipe, strType } = foodOrDrinkTypes;
 
   // componentDidMount
   useEffect(() => {
     loadLocalStorage(setSavedRecipe);
+    disp(actionFetchID(idReceita, page));
   }, []);
 
   // componentDidUpdate
@@ -98,36 +100,18 @@ export default function FoodsInProgress() {
     localStorage.setItem('inProgressRecipes', JSON.stringify(savedRecipe));
   }, [savedRecipe]);
 
-  useEffect(() => {
-    const page = window.location.pathname.split('/')[1];
-    if (page === 'comidas') {
-      fetchComidas(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idReceita}`, setData);
-    } else {
-      fetchComidas(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idReceita}`, setData);
-    }
-  }, [idReceita]);
-
-  if (!data[foodType]) {
+  if (!data[0]) {
     return (<p>Carregando</p>);
   }
-
-  let food;
-  let strType;
-
-  if (data.meals) {
-    [food] = data[foodType];
-    strType = 'strMeal';
-  } else {
-    [food] = data.drinks;
-    strType = 'strDrink';
-  }
+  const [food] = data;
+  setItem(food);
 
   const ingredients = Object.keys(food).filter((value) => value.includes('strIngredient'))
     .filter((ingredient) => food[ingredient]);
 
-  const items = { idReceita, type, data, foodType };
+  const items = { idReceita, type, food, foodType };
   const newItems = { savedRecipe, recipe, idRecipe, setSavedRecipe };
-  const verifyrecipe = savedRecipe[recipe][data[foodType][0][idRecipe]] || false;
+  const verifyrecipe = savedRecipe[recipe][food[idRecipe]] || false;
   if (!checkIngredients) {
     ingredients.forEach((ingredient) => {
       setCheckIngredients({ ...checkIngredients, [food[ingredient]]: false });
@@ -156,7 +140,7 @@ export default function FoodsInProgress() {
               <label
                 htmlFor={ food[ingredient] }
                 className={ verifyrecipe
-                  && savedRecipe[recipe][data[foodType][0][idRecipe]]
+                  && savedRecipe[recipe][food[idRecipe]]
                     .includes(food[ingredient]) ? 'riscado' : '' }
               >
                 <input
@@ -165,7 +149,7 @@ export default function FoodsInProgress() {
                   name={ food[ingredient] }
                   onClick={ (event) => handleClick(event, items, newItems) }
                   defaultChecked={ verifyrecipe
-                    && savedRecipe[recipe][data[foodType][0][idRecipe]]
+                    && savedRecipe[recipe][food[idRecipe]]
                       .includes(food[ingredient]) }
                 />
                 { food[ingredient] }
@@ -181,13 +165,15 @@ export default function FoodsInProgress() {
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ ingredients.length !== verifyrecipe.length }
-            onClick={ () => setLocalStorage(items, idRecipe, type) }
+            onClick={ () => {
+              setLocalStorage(items, idRecipe, type);
+            } }
           >
             Finalizar Receita
           </button>
         </Link>
         <ShareButton />
-        <FavoriteButton items={ items } />
+        <FavoriteButton />
       </div>
     </div>
   );
