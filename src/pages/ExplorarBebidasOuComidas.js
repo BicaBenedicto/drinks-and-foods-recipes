@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { actionFetchRandom } from '../redux/actions';
 
 function ExplorarBebidas() {
+  const disp = useDispatch();
   const { pathname } = useLocation();
+  const history = useHistory();
+  const stateRedux = useSelector((state) => state.meal.item[0]);
   const [, , TYPE] = pathname.split('/');
+  const nameObj = (TYPE === 'comidas' ? 'idMeal' : 'idDrink');
   const PageType = (TYPE === 'comidas' ? 'Comidas' : 'Bebidas');
   const redirectName = (TYPE === 'comidas' ? 'comidas' : 'bebidas');
-  const history = useHistory();
+
+  useEffect(() => {
+    disp(actionFetchRandom(redirectName));
+  }, []);
+
+  function randomRecipeAndRedirect() {
+    const idItem = stateRedux[nameObj];
+    history.push(`/${redirectName}/${idItem}`);
+  }
 
   return (
     <>
@@ -34,6 +48,7 @@ function ExplorarBebidas() {
         <button
           type="button"
           data-testid="explore-surprise"
+          onClick={ randomRecipeAndRedirect }
         >
           Me Surpreenda!
         </button>
