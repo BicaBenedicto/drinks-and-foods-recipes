@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/actions';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
@@ -13,10 +13,15 @@ function Foods() {
   const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
+  const history = useHistory();
+  const { location } = history;
 
   useEffect(() => {
+    if (!location.state || !location.state.fromExplorar) {
+      disp(actionFetchName('', pageActual));
+    }
     disp(actionFetchList(pageActual));
-    disp(actionFetchName('', pageActual));
+    history.push({ state: { fromExplorar: false } });
   }, []);
 
   const { list, categories } = useSelector((state) => state.meal);
@@ -32,15 +37,10 @@ function Foods() {
         checkbox.checked = false;
       }
     });
-    if (target.checked) {
-      if (strCategory === 'All') {
-        disp(actionFetchName('', pageActual));
-      } else {
-        disp(actionFetchCategory(strCategory, pageActual));
-      }
-    } else {
-      disp(actionFetchName('', pageActual));
+    if (target.checked && strCategory !== 'All') {
+      disp(actionFetchCategory(strCategory, pageActual));
     }
+    disp(actionFetchName('', pageActual));
   }
 
   return (

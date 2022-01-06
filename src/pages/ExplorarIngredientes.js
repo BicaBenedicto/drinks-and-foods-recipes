@@ -1,17 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { actionFetchIngredientList, actionFetchIngrediente } from '../redux/actions';
 
-function ExplorarIngredientes() {
+export default function ExploreIngredientes() {
+  const disp = useDispatch();
+  const history = useHistory();
+  const [strIngredients, setStrIngredient] = useState(null);
+  const location = window.location.pathname.split('/')[2];
+  const TYPE = (location === 'bebidas');
+  const MAX_INGREDIENTS = 12;
+  const dbType = TYPE ? 'thecocktaildb' : 'themealdb';
+
+  useEffect(() => {
+    disp(actionFetchIngredientList(location));
+  }, []);
+
+  const ingredients = useSelector((state) => state.meal.list);
+
+  useEffect(() => {
+    if (ingredients.length !== 0) {
+      setStrIngredient(ingredients.filter((_, index) => index < MAX_INGREDIENTS));
+    }
+  }, [ingredients]);
+  if (!ingredients || !strIngredients) {
+    return <p>Carregando...</p>;
+  }
+
+  const onIngredientClick = (name) => {
+    disp(actionFetchIngrediente(name, location));
+    history.push({ pathname: `/${location}`, state: { fromExplorar: true } });
+  };
+
   return (
-    <>
+    <div>
       <Header pageTitle="Explorar Ingredientes" />
-      <div>
-        Empty
+      <div className="container-ingredient-cards">
+        {
+          strIngredients.map((value, index) => (
+            <button
+              type="button"
+              data-testid={ `${index}-ingredient-card` }
+              onClick={ () => onIngredientClick(value.strIngredient
+                || value.strIngredient1) }
+              className="ingredient-cards"
+              key={ value.idIngredient }
+            >
+              <img
+                src={ `https://www.${dbType}.com/images/ingredients/${
+                  value.strIngredient || value.strIngredient1}-Small.png` }
+                alt={ value.strIngredient || value.strIngredient1 }
+                data-testid={ `${index}-card-img` }
+              />
+              <h5 data-testid={ `${index}-card-name` }>
+                { value.strIngredient || value.strIngredient1 }
+              </h5>
+            </button>
+          ))
+        }
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
-
-export default ExplorarIngredientes;

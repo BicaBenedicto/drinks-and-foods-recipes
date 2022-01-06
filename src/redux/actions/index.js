@@ -6,6 +6,7 @@ import {
   fetchList,
   fetchID,
   fetchRandom,
+  fetchIngredientsList,
 } from '../../services/fetchFood';
 
 export const GET_EMAIL = 'GET_EMAIL';
@@ -56,3 +57,8 @@ export const actionFetchID = (type, page) => (dispatch) => (
 export const actionFetchRandom = (type) => (dispatch) => (
   fetchRandom(type)
     .then((response) => dispatch(actionMealOrDrink(response))));
+
+export const actionFetchIngredientList = (type) => (dispatch) => (
+  fetchIngredientsList(type)
+    .then((response) => dispatch(actionMeals(response)))
+);

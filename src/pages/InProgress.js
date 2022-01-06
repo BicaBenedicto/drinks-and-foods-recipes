@@ -76,6 +76,7 @@ export default function FoodsInProgress() {
     cocktails: {},
     meals: {},
   });
+
   const data = useSelector((s) => s.meal.item);
 
   const [checkIngredients, setCheckIngredients] = useState(null);
@@ -87,6 +88,7 @@ export default function FoodsInProgress() {
     idRecipe: TYPE ? 'idDrink' : 'idMeal',
     strType: TYPE ? 'strDrink' : 'strMeal',
   };
+
   const { foodType, recipe, type, idRecipe, strType } = foodOrDrinkTypes;
 
   // componentDidMount

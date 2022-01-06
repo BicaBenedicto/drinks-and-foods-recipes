@@ -46,13 +46,14 @@ function SearchBar() {
   return (
     <div className="search">
       <div className="search-container">
-        <form onChange={ handleChange } onSubmit={ handleSubmit }>
+        <form onSubmit={ handleSubmit }>
           <input
             data-testid="search-input"
             type="text"
             placeholder="Buscar Receita"
             name="searchInput"
             value={ searchFood.value }
+            onChange={ handleChange }
           />
           <label htmlFor="radio-ingredient">
             <input
@@ -62,6 +63,7 @@ function SearchBar() {
               value="ingrediente"
               name="searchFilter"
               data-testid="ingredient-search-radio"
+              onChange={ handleChange }
             />
             Ingrediente
           </label>
@@ -73,6 +75,7 @@ function SearchBar() {
               value="nome"
               name="searchFilter"
               data-testid="name-search-radio"
+              onChange={ handleChange }
             />
             Nome
           </label>
@@ -84,6 +87,7 @@ function SearchBar() {
               name="searchFilter"
               id="radio-first-letter"
               data-testid="first-letter-search-radio"
+              onChange={ handleChange }
             />
             Primeira Letra
           </label>
