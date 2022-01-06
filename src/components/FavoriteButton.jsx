@@ -53,7 +53,7 @@ export default function FavoriteButton({ index, RECIPE_ID }) {
     verifyFavorite(favoriteItem, ITEM, id, favoriteRecipes);
   };
 
-  const DATA_TESTID = (index >= 0 ? `${index}-horizontal-favorite-btn` : 'favorite-btn');
+  const DATA_TESTID = (RECIPE_ID ? `${index}-horizontal-favorite-btn` : 'favorite-btn');
 
   return (
     <button

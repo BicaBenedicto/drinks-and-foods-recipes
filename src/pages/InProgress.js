@@ -55,7 +55,7 @@ function setLocalStorage(items, idRecipe, type) {
     name: food.strMeal || food.strDrink,
     image: food.strMealThumb || food.strDrinkThumb,
     doneDate: new Date().toLocaleDateString('PT-BR'),
-    tags: food.strTags || '',
+    tags: [food.strTags] || [],
   };
 
   if (!localStorage.doneRecipes) {
