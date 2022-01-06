@@ -38,9 +38,9 @@ function Bebidas() {
       }
     });
     if (target.checked && strCategory !== 'All') {
-      disp(actionFetchCategory(strCategory, pageActual));
+      return disp(actionFetchCategory(strCategory, pageActual));
     }
-    disp(actionFetchName('', pageActual));
+    return disp(actionFetchName('', pageActual));
   }
 
   return (

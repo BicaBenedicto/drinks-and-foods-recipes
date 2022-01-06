@@ -65,6 +65,10 @@ export const actionFetchIngredientList = (type) => (dispatch) => (
     .then((response) => dispatch(actionMeals(response)))
 );
 
-export const actionFetchFoodArea = () => (dispatch) => (
-  fetchFoodArea().then((response) => dispatch(actionMealOrDrink(response)))
+export const actionFetchFoodArea = (type, search = '') => (dispatch) => (
+  fetchFoodArea(type, search)
+    .then((response) => {
+      if (type === 'list') return dispatch(actionCategories(response));
+      return dispatch(actionMeals(response));
+    })
 );
