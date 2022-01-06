@@ -17,6 +17,7 @@ import Perfil from './pages/Perfil';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import Details from './pages/Details';
+import NotFound from './pages/NotFound';
 
 function App() {
   const [login, changeLogin] = useState({ email: '', password: '' });
@@ -70,6 +71,7 @@ function App() {
           <Route path="/comidas" component={ Comidas } />
           <Route path="/bebidas" component={ Bebidas } />
           <Route path="/explorar/comidas/area" component={ ExplorarComidasArea } />
+          <Route path="/explorar/bebidas/area" component={ NotFound } />
           <Route
             path="/explorar/bebidas/ingredientes"
             component={ ExplorarIngredientes }
@@ -84,6 +86,7 @@ function App() {
           <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
           <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+          <Route path="*" component={ NotFound } />
         </Switch>
       </Context.Provider>
     </Provider>
