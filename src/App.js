@@ -28,6 +28,8 @@ function App() {
   const [measures, setMeasures] = useState([]);
   const [recipesInProgress, addRecipeInProgress] = useState({ cocktails: {}, meals: {} });
   const [actualIngredients, setActualIngredients] = useState([]);
+  const [favorites, setFavorites] = useState(JSON
+    .parse(localStorage.getItem('favoriteRecipes')));
 
   const STORE_CONTEXT = {
     login,
@@ -49,6 +51,10 @@ function App() {
       setActualIngredients,
       recipesInProgress,
       addRecipeInProgress,
+    },
+    favoriteRecipes: {
+      favorites,
+      setFavorites,
     },
   };
 

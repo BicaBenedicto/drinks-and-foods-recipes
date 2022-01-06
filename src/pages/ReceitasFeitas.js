@@ -87,10 +87,10 @@ function ReceitasFeitas() {
                 { recipe.doneDate }
               </p>
               <div>
-                {recipe.tags.map((tag) => (
+                { recipe.tags && recipe.tags.map((tag, i) => (
                   <p
-                    key={ tag }
                     data-testid={ `${index}-${tag}-horizontal-tag` }
+                    key={ i }
                   >
                     {tag}
                   </p>
