@@ -19,7 +19,6 @@ function ExplorarComidasArea() {
 
   const storageRedux = useSelector((state) => state.meal);
   const foodArea = [{ strArea: 'All' }].concat(storageRedux.categories);
-  console.log(storageRedux);
 
   return (
     <>

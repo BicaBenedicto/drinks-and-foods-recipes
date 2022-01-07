@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, cleanup } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import renderWithRedux from './renderWithRedux';
 import { renderWithRouterAndStore } from './renderWithRouterAndRedux';
@@ -43,53 +43,7 @@ const TEST_PAGE = {
   },
 };
 
-const mockFetch = () => { jest.spyOn(global, 'fetch')
-    .mockImplementation(() => Promise
-    .resolve({ status: 200, ok: true, json: () => Promise
-    .resolve({}) })); };
-
-describe('Teste do Header na tela de', () => {
-  beforeAll(mockFetch);
-  beforeEach(cleanup);
-  it('o componente teste não aparece na tela de login', () => {
-    renderWithRouter(<App />);
-    const { headerTest, searchIconTest, profileIconTest } = TEST_PAGE;
-    headerTest('', false);
-    searchIconTest(false);
-    profileIconTest(false);
-  });
-
-  it('o componente header aparece na página de comidas', () => {
-    renderWithRedux(<Comidas />);
-    const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
-    headerTest('Comidas');
-    profileIconTest();
-    searchIconTest();
-  });
-
-  it('o componente header não aparece na página de comida detalhadas', () => {
-    renderWithRedux(<Details />);
-    const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
-    headerTest('Comida', false);
-    searchIconTest(false);
-    profileIconTest(false);
-  });
-
-  it('o componente header não aparece na página de comida em progesso', () => {
-    renderWithRedux(<InProgress />);
-    const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
-    headerTest('Comida', false);
-    searchIconTest(false);
-    profileIconTest(false);
-  });
-
-  it('o componente header aparece na página de bebidas', () => {
-    renderWithRedux(<Bebidas />);
-    const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
-    headerTest('Bebidas');
-    profileIconTest();
-    searchIconTest();
-  });
+describe('Teste 2 do Header na tela de', () => {
 
   it('o componente header não aparece na página de Bebidas detalhadas', () => {
     renderWithRedux(<Details />);
@@ -99,13 +53,13 @@ describe('Teste do Header na tela de', () => {
     profileIconTest(false);
   });
 
-  // it('o componente header não aparece na página de Bebida em progesso', () => {
-  //   renderWithRedux(<InProgress />);
-  //   const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
-  //   headerTest('Bebida', false);
-  //   searchIconTest(false);
-  //   profileIconTest(false);
-  // });
+  it('o componente header não aparece na página de Bebida em progesso', () => {
+    renderWithRedux(<InProgress />);
+    const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
+    headerTest('Bebida', false);
+    searchIconTest(false);
+    profileIconTest(false);
+  });
 
   // it('o componente header aparece na página de explorar', () => {
   //   renderWithRouter(<Explorar />);
@@ -171,3 +125,4 @@ describe('Teste do Header na tela de', () => {
   //   searchIconTest(false);
   // });
 });
+

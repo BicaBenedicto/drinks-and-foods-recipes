@@ -40,14 +40,14 @@ const URL = {
 async function fetchIngrediente(ingrediente, page) {
   const { searchByIngredients } = URL;
   const response = await fetch(`${searchByIngredients[page
-    .toLowerCase()]}${ingrediente}`);
+    .toLowerCase()]}${ingrediente}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
 
 async function fetchName(name, page) {
   const { searchByName } = URL;
-  const response = await fetch(`${searchByName[page.toLowerCase()]}${name}`);
+  const response = await fetch(`${searchByName[page.toLowerCase()]}${name}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
@@ -55,28 +55,28 @@ async function fetchName(name, page) {
 async function fetchFirstLetter(firstLetter, page) {
   const { searchByFirstLetter } = URL;
   const response = await fetch(`${searchByFirstLetter[page
-    .toLowerCase()]}${firstLetter}`);
+    .toLowerCase()]}${firstLetter}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
 
 async function fetchCategory(category, page) {
   const { searchByCategory } = URL;
-  const response = await fetch(`${searchByCategory[page.toLowerCase()]}${category}`);
+  const response = await fetch(`${searchByCategory[page.toLowerCase()]}${category}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
 
 async function fetchList(page) {
   const { renderByList } = URL;
-  const response = await fetch(`${renderByList[page.toLowerCase()]}`);
+  const response = await fetch(`${renderByList[page.toLowerCase()]}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
 
 async function fetchID(id, page) {
   const { renderByID } = URL;
-  const response = await fetch(`${renderByID[page.toLowerCase()]}${id}`);
+  const response = await fetch(`${renderByID[page.toLowerCase()]}${id}/`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
@@ -97,7 +97,7 @@ async function fetchIngredientsList(page) {
 
 async function fetchFoodArea(type, search) {
   const { renderByFoodArea } = URL;
-  const response = await fetch(`${renderByFoodArea[type]}${search}`);
+  const response = await fetch(`${renderByFoodArea[type]}${search}/`);
   const results = await response.json();
   return results.meals;
 }

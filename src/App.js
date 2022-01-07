@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import './App.css';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
-import Context from './services/Context';
 import store from './redux/store/index';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
@@ -18,50 +16,12 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import Details from './pages/Details';
 import NotFound from './pages/NotFound';
+import ProviderHook from './services/Provider';
 
 function App() {
-  const [login, changeLogin] = useState({ email: '', password: '' });
-  const [searchFood, setSearchFood] = useState({ value: '', type: 'nome' });
-  const [meals, setMeals] = useState({});
-  const [categories, setCategories] = useState({});
-  const [item, setItem] = useState({});
-  const [ingredients, setIngredients] = useState([]);
-  const [measures, setMeasures] = useState([]);
-  const [recipesInProgress, addRecipeInProgress] = useState({ cocktails: {}, meals: {} });
-  const [actualIngredients, setActualIngredients] = useState([]);
-  const [favorites, setFavorites] = useState(JSON
-    .parse(localStorage.getItem('favoriteRecipes')));
-
-  const STORE_CONTEXT = {
-    login,
-    changeLogin,
-    searchFood,
-    setSearchFood,
-    meals,
-    setMeals,
-    categories,
-    setCategories,
-    item,
-    setItem,
-    ingredients,
-    setIngredients,
-    measures,
-    setMeasures,
-    inProgressRecipes: {
-      actualIngredients,
-      setActualIngredients,
-      recipesInProgress,
-      addRecipeInProgress,
-    },
-    favoriteRecipes: {
-      favorites,
-      setFavorites,
-    },
-  };
-
   return (
     <Provider store={ store }>
-      <Context.Provider value={ STORE_CONTEXT }>
+      <ProviderHook>
         <Switch>
           <Route exact path="/" component={ Login } />
           <Route path="/comidas/:id/in-progress" component={ InProgress } />
@@ -88,7 +48,7 @@ function App() {
           <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
           <Route path="*" component={ NotFound } />
         </Switch>
-      </Context.Provider>
+      </ProviderHook>
     </Provider>
 
   );
