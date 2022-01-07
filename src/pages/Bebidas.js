@@ -47,9 +47,8 @@ function Bebidas() {
     <div className="main-page">
       <Header pageTitle={ pageActual } />
       <div className="all-categories">
-        <label htmlFor="All">
+        <label htmlFor="All" className="meals-categories">
           <input
-            className="all-categorie"
             data-testid="All-category-filter"
             id="All"
             type="checkbox"

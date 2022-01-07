@@ -1,5 +1,7 @@
 header {
-  background-color: rgb(140, 151, 140);
+  background-color: var(--i-main);
+  width: 100%;
+  z-index: 20;
 }
 
 .header-main {

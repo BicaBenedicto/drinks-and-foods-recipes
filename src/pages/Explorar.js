@@ -8,7 +8,7 @@ function Explorar() {
   return (
     <>
       <Header pageTitle="Explorar" />
-      <div>
+      <div className="main-page">
         <button
           type="button"
           data-testid="explore-food"

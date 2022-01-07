@@ -6,6 +6,7 @@ import Cards from '../components/Cards';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
 import Footer from '../components/Footer';
+import '../styles/MealsOrDrinks.css';
 
 const pageActual = 'Comidas';
 
@@ -47,9 +48,8 @@ function Foods() {
     <div className="main-page">
       <Header pageTitle={ pageActual } />
       <div className="all-categories">
-        <label htmlFor="All">
+        <label htmlFor="All" className="meals-categories">
           <input
-            className="all-categorie"
             data-testid="All-category-filter"
             id="All"
             type="checkbox"

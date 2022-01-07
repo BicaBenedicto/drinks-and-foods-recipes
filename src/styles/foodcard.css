@@ -1,25 +1,30 @@
-.all-categories {
-  padding: 20px;
-  text-align: center;
+.main-page {
+  width: 100%;
 }
 
-.all-categorie {
-  background-color: lightgrey;
-  border-radius: 10px;
-  font-size : 20px;
-  font-weight: 700;
+.all-categories {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
 }
 
 .meals-categories {
-  background-color: lightgrey;
+  background-color: var(--i-secondary);
   border-radius: 10px;
   font-size: 20px;
   font-weight: 700;
+  margin: 2px;
+  padding: 2px 3px;
 }
 
 .foodcard {
   align-items: center;
+  background-color: transparent;
+  border: none;
   display: flex;
+  height: 250px;
   justify-content: space-evenly;
   margin: auto;
 }
@@ -29,15 +34,26 @@
 }
 
 .card {
+  background-color: transparent;
+  border: none;
   display: inline-block;
-  margin: auto;
-  width: 50%;
+  margin: 5px;
+  position: relative;
+  width: 45%;
 }
 
 .foodcard img {
-  width: 50%;
+  border-radius: 20px;
+  filter: brightness(80%);
+  height: 100%;
+  width: 100%;
 }
 
 .name-card-food {
-  width: 30%;
+  color: var(--i-main);
+  font-size: 20px;
+  max-height: 90%;
+  position: absolute;
+  text-align: center;
+  width: 80%;
 }

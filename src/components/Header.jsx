@@ -22,7 +22,7 @@ function Header(props) {
   };
 
   return (
-    <div>
+    <>
       <header className="header-main" id="header-main">
         <button
           type="button"
@@ -53,7 +53,7 @@ function Header(props) {
           </button>)}
       </header>
       { renderSearchBar && <SearchBar /> }
-    </div>
+    </>
   );
 }
 
