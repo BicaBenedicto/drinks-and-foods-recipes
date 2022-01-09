@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Context from './Context';
 
 export default function ProviderHook({ children }) {
@@ -47,3 +48,7 @@ export default function ProviderHook({ children }) {
     </Context.Provider>
   );
 }
+
+ProviderHook.propTypes = {
+  children: PropTypes.element.isRequired,
+};
