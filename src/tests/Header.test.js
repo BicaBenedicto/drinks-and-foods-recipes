@@ -40,13 +40,11 @@ const TEST_PAGE = {
   },
 };
 
-const mockFetch = () => {
-  jest.spyOn(global, 'fetch')
-    .mockImplementation(fetchMock);
-};
-
 describe('Teste do Header na tela de', () => {
-  beforeEach(mockFetch);
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch')
+      .mockImplementation(fetchMock);
+  });
   afterEach(cleanup);
   it('o componente teste não aparece na tela de login', () => {
     renderWithRouter(<App />);

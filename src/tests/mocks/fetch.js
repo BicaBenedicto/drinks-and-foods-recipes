@@ -66,7 +66,6 @@ const fetch = (url) => Promise.resolve({
     if (URL[url]) {
       return Promise.resolve(URL[url]);
     }
-
     return Promise.resolve(meals);
   },
 });
