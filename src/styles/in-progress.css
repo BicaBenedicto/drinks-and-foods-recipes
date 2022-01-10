@@ -1,3 +1,6 @@
 .riscado {
+  background-color: var(--i-tertiary);
+  padding: 5px 10px;
   text-decoration: line-through;
+  width: 100%;
 }

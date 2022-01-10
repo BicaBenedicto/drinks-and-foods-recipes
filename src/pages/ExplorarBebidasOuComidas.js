@@ -27,9 +27,10 @@ function ExplorarBebidas() {
   return (
     <>
       <Header pageTitle={ `Explorar ${PageType}` } />
-      <div>
+      <div className="explorar-page">
         <button
           type="button"
+          className="explorar-items"
           data-testid="explore-by-ingredient"
           onClick={ () => history.push(`/explorar/${redirectName}/ingredientes`) }
         >
@@ -39,6 +40,7 @@ function ExplorarBebidas() {
         && (
           <button
             type="button"
+            className="explorar-items"
             data-testid="explore-by-area"
             onClick={ () => history.push('/explorar/comidas/area') }
           >
@@ -47,6 +49,7 @@ function ExplorarBebidas() {
         )}
         <button
           type="button"
+          className="explorar-items"
           data-testid="explore-surprise"
           onClick={ randomRecipeAndRedirect }
         >

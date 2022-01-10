@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
+import '../styles/receitasFeitas.css';
 
 function renderUrl(type, id) {
   const URL = window.location.href.replace('/receitas-feitas', '');
@@ -20,9 +21,9 @@ function ReceitasFeitas() {
   }, []);
 
   return (
-    <>
+    <div className="receitas-feitas-page">
       <Header pageTitle="Receitas Feitas" />
-      <div>
+      <div className="buttons-filter">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -44,49 +45,31 @@ function ReceitasFeitas() {
         >
           Drinks
         </button>
-        { hasDoneRecipes
-          ? doneRecipes.filter((recipe) => {
-            if (categories === 'All' || recipe.type === categories) return true;
-            return false;
-          }).map((recipe, index) => (
-            <div key={ recipe.id }>
-              <Link
-                className="card"
-                to={ (recipe.type === 'comida'
-                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-              >
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ recipe.image }
-                  alt={ recipe.name }
-                  className="horizontal-image"
-                />
-              </Link>
-              <p
-                className="categories-text"
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
-              </p>
-              <Link
-                className="card"
-                to={ (recipe.type === 'comida'
-                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-              >
+      </div>
+      { hasDoneRecipes
+        ? doneRecipes.filter((recipe) => {
+          if (categories === 'All' || recipe.type === categories) return true;
+          return false;
+        }).map((recipe, index) => (
+          <div key={ recipe.id } className="card-item">
+            <Link
+              to={ (recipe.type === 'comida'
+                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+            >
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                src={ recipe.image }
+                alt={ recipe.name }
+                className="horizontal-image"
+              />
+            </Link>
+            <div>
+              <div className="categories-text">
                 <p
-                  className="recipes-text"
-                  data-testid={ `${index}-horizontal-name` }
+                  data-testid={ `${index}-horizontal-top-text` }
                 >
-                  { recipe.name }
+                  { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
                 </p>
-              </Link>
-              <p
-                className="date"
-                data-testid={ `${index}-horizontal-done-date` }
-              >
-                { recipe.doneDate }
-              </p>
-              <div>
                 { recipe.tags && recipe.tags.map((tag, i) => (
                   <p
                     data-testid={ `${index}-${tag}-horizontal-tag` }
@@ -96,15 +79,35 @@ function ReceitasFeitas() {
                   </p>
                 ))}
               </div>
-              <ShareButton
-                index={ index }
-                url={ renderUrl(recipe.type, recipe.id) }
-              />
+              <div>
+                <Link
+                  className="card"
+                  to={ (recipe.type === 'comida'
+                    ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+                >
+                  <p
+                    className="recipes-text"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    { recipe.name }
+                  </p>
+                </Link>
+                <p
+                  className="date"
+                  data-testid={ `${index}-horizontal-done-date` }
+                >
+                  { recipe.doneDate }
+                </p>
+                <ShareButton
+                  index={ index }
+                  url={ renderUrl(recipe.type, recipe.id) }
+                />
+              </div>
             </div>
-          ))
-          : <h1>Você não tem receitas feitas ainda!</h1>}
-      </div>
-    </>
+          </div>
+        ))
+        : <h1>Você não tem receitas feitas ainda!</h1>}
+    </div>
   );
 }
 

@@ -45,7 +45,6 @@ function handleClick({ target }, items, newItems) {
 
 function setLocalStorage(items, idRecipe, type) {
   const { food } = items;
-  console.log(food);
   const saveLocal = {
     id: food.idMeal || food.idDrink,
     type: type.replace('s', ''),
@@ -121,62 +120,70 @@ export default function FoodsInProgress() {
   }
 
   return (
-    <div>
-      <div className="in-progress-card">
-        <h3 data-testid="recipe-title">
-          { food[strType] }
-        </h3>
-        <img
-          src={ food[`${strType}Thumb`] }
-          alt={ food[strType] }
-          data-testid="recipe-photo"
-        />
+    <div className="details-page">
+      <ShareButton />
+      <FavoriteButton />
+      <img
+        src={ food[`${strType}Thumb`] }
+        alt={ food[strType] }
+        data-testid="recipe-photo"
+        className="recipe-image-progress"
+      />
+      <h3
+        className="recipe-title"
+        data-testid="recipe-title"
+      >
+        { food[strType] }
+      </h3>
+      <ul className="ingredients-list lista-checkbox">
         <h4
           data-testid="recipe-category"
         >
           { strType === 'strMeal' ? 'Comida' : 'Bebida' }
         </h4>
-        <ul>
-          { ingredients.map((ingredient, index) => (
-            <li key={ index } data-testid={ `${index}-ingredient-step` }>
-              <label
-                htmlFor={ food[ingredient] }
-                className={ verifyrecipe
+        { ingredients.map((ingredient, index) => (
+          <li key={ index } data-testid={ `${index}-ingredient-step` }>
+            <label
+              htmlFor={ food[ingredient] }
+              className={ verifyrecipe
                   && savedRecipe[recipe][food[idRecipe]]
-                    .includes(food[ingredient]) ? 'riscado' : '' }
-              >
-                <input
-                  type="checkbox"
-                  id={ food[ingredient] }
-                  name={ food[ingredient] }
-                  onClick={ (event) => handleClick(event, items, newItems) }
-                  defaultChecked={ verifyrecipe
+                    .includes(food[ingredient]) ? 'riscado' : 'not-select' }
+            >
+              <input
+                type="checkbox"
+                id={ food[ingredient] }
+                name={ food[ingredient] }
+                onClick={ (event) => handleClick(event, items, newItems) }
+                defaultChecked={ verifyrecipe
                     && savedRecipe[recipe][food[idRecipe]]
                       .includes(food[ingredient]) }
-                />
-                { food[ingredient] }
-              </label>
-            </li>
-          )) }
-        </ul>
-        <p data-testid="instructions">
-          { food.strInstructions }
-        </p>
-        <Link to="/receitas-feitas">
-          <button
-            type="button"
-            data-testid="finish-recipe-btn"
-            disabled={ ingredients.length !== verifyrecipe.length }
-            onClick={ () => {
-              setLocalStorage(items, idRecipe, type);
-            } }
-          >
-            Finalizar Receita
-          </button>
-        </Link>
-        <ShareButton />
-        <FavoriteButton />
-      </div>
+              />
+              &gt;
+              {' '}
+              { food[ingredient] }
+            </label>
+          </li>
+        )) }
+      </ul>
+      <p
+        className="instructions"
+        data-testid="instructions"
+      >
+        { food.strInstructions }
+      </p>
+      <Link to="/receitas-feitas">
+        <button
+          type="button"
+          className="end-recipe"
+          data-testid="finish-recipe-btn"
+          disabled={ ingredients.length !== verifyrecipe.length }
+          onClick={ () => {
+            setLocalStorage(items, idRecipe, type);
+          } }
+        >
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }

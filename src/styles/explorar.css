@@ -1,0 +1,37 @@
+.explorar-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 70vh;
+}
+
+.filtro-explorar {
+  background-color: var(--i-tertiary);
+  border-radius: 10px 10px 0 0;
+  color: var(--i-main);
+  margin: 10px;
+}
+
+.explorar {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 20px;
+  color: var(--i-main);
+  font-size: 30px;
+  font-weight: 600;
+  height: 45%;
+  width: 80%;
+}
+
+.explorar-items {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 20px;
+  color: var(--i-main);
+  font-size: 20px;
+  font-weight: 600;
+  height: 40%;
+  width: 40%;
+}

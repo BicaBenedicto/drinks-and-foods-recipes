@@ -9,6 +9,7 @@
   --i-highlight: #fec7d7;
   --i-secondary: #d9d4e7;
   --i-tertiary: #a786df;
+  --i-tertiary-2: hsl(262, 58%, 80%);
 }
 
 body, #root {

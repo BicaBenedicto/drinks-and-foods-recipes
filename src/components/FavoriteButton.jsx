@@ -58,6 +58,7 @@ export default function FavoriteButton({ index, RECIPE_ID }) {
   return (
     <button
       type="button"
+      className="favorite-button"
       onClick={ onClickFavoriteButton }
     >
       {hasFavorite

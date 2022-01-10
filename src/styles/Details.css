@@ -1,0 +1,104 @@
+.details-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 50px;
+  width: 100%;
+}
+
+.details-page .recipe-image {
+  height: 350px;
+  width: 100%;
+}
+
+.details-page .recipe-image-progress {
+  height: 450px;
+  filter: brightness(70%);
+  width: 100%;
+}
+
+.details-page .favorite-button {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  z-index: 1;
+}
+
+.details-page .share-button {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 1;
+}
+
+.details-page .start-recipe {
+  background-color: var(--i-secondary);
+  border: none;
+  color: var(--headline);
+  font-size: 25px;
+  padding: 5px 0;
+}
+
+.details-page .ingredients-list {
+  align-self: flex-start;
+  background-color: var(--i-main);
+  font-size: 18px;
+  padding: 20px 40px;
+  width: 100%;
+}
+
+.details-page .instructions {
+  background-color: var(--background);
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+  height: 50%;
+  width: 100%;
+}
+
+.details-page .recipe-title {
+  color: var(--i-main);
+  font-size: 50px;
+  position: absolute;
+  text-align: center;
+  top: 60px;
+  z-index: 1;
+}
+
+.details-page .lista-checkbox {
+  list-style: none;
+}
+
+.details-page .lista-checkbox .not-select {
+  background-color: var(--i-secondary);
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.details-page .lista-checkbox input {
+  display: none;
+  margin: 5px;
+}
+
+.details-page .end-recipe {
+  background-color: var(--i-secondary);
+  border: none;
+  color: var(--headline);
+  font-size: 30px;
+  padding: 10px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.details-page .end-recipe:disabled {
+  background-color: aqua;
+}

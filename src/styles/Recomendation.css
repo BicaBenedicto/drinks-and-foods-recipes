@@ -1,0 +1,30 @@
+.recomendation {
+  display: flex;
+  overflow: scroll;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.recomendation-item {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0 5px;
+}
+
+.recomendation-item img {
+  height: 250px;
+  filter: brightness(70%);
+  width: 250px;
+}
+
+.recomendation-item span {
+  color: white;
+  position: absolute;
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  top: 35%;
+  z-index: 1;
+}

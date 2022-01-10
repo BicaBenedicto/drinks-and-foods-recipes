@@ -5,24 +5,37 @@
 .all-categories {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   padding: 20px;
   text-align: center;
   width: 100%;
 }
 
 .meals-categories {
-  background-color: var(--i-secondary);
+  background-color: var(--i-main);
   border-radius: 10px;
+  color: var(--headline);
   font-size: 20px;
   font-weight: 700;
-  margin: 2px;
-  padding: 2px 3px;
+  margin: 5px;
+  padding: 2px 5px;
+}
+
+.meals-categories input {
+  display: none;
+}
+
+.meals-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .foodcard {
   align-items: center;
-  background-color: transparent;
+  background-color: var(--i-tertiary-2);
   border: none;
+  border-radius: 10px;
   display: flex;
   height: 250px;
   justify-content: space-evenly;

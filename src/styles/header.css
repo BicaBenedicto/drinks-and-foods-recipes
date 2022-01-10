@@ -1,5 +1,5 @@
 header {
-  background-color: var(--i-main);
+  background-color: var(--i-secondary);
   width: 100%;
   z-index: 20;
 }
@@ -7,6 +7,17 @@ header {
 .header-main {
   display: flex;
   justify-content: space-between;
+  padding: 0 10px;
+}
+
+.header-page-title {
+  font-size: 30px;
+  padding: 5px 0;
+}
+
+.header-main button {
+  border: none;
+  background-color: transparent;
 }
 
 .search-container {
