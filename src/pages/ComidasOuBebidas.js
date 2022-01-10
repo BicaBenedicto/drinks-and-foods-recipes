@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/actions';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
@@ -12,6 +12,7 @@ function Foods() {
   const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
+  const { pathname } = useLocation();
   const [, PAGE] = pathname.split('/');
   const history = useHistory();
   const { location } = history;
