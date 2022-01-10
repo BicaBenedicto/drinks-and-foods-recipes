@@ -94,7 +94,7 @@ function Foods() {
               className="card"
               data-testid={ `${index}-recipe-card` }
               key={ index }
-              to={ `/comidas/${meal[idType]}` }
+              to={ `/${PAGE}/${meal[idType]}` }
             >
               <Cards
                 name={ meal[strType] }
