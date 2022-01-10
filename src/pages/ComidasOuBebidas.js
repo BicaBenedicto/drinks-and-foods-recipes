@@ -8,14 +8,20 @@ import '../styles/foodcard.css';
 import Footer from '../components/Footer';
 import '../styles/MealsOrDrinks.css';
 
-const pageActual = 'Comidas';
-
 function Foods() {
   const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
+  const [, PAGE] = pathname.split('/');
   const history = useHistory();
   const { location } = history;
+  const typeObjPage = {
+    pageActual: (PAGE === 'comidas' ? 'Comidas' : 'Bebidas'),
+    idType: (PAGE === 'comidas' ? 'idMeal' : 'idDrink'),
+    strType: (PAGE === 'comidas' ? 'strMeal' : 'strDrink'),
+    strTypeThumb: (PAGE === 'comidas' ? 'strMealThumb' : 'strDrinkThumb'),
+  };
+  const { pageActual, idType, strType, strTypeThumb } = typeObjPage;
 
   useEffect(() => {
     if (!location.state || !location.state.fromExplorar) {
@@ -87,11 +93,11 @@ function Foods() {
               className="card"
               data-testid={ `${index}-recipe-card` }
               key={ index }
-              to={ `/comidas/${meal.idMeal}` }
+              to={ `/comidas/${meal[idType]}` }
             >
               <Cards
-                name={ meal.strMeal }
-                thumb={ meal.strMealThumb }
+                name={ meal[strType] }
+                thumb={ meal[strTypeThumb] }
                 index={ index }
               />
             </Link>

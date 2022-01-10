@@ -4,8 +4,6 @@ import renderWithRouter from './renderWithRouter';
 import renderWithRedux from './renderWithRedux';
 import { renderWithRouterAndStore } from './renderWithRouterAndRedux';
 import App from '../App';
-import Comidas from '../pages/Comidas';
-import Bebidas from '../pages/Bebidas';
 import Explorar from '../pages/Explorar';
 import ExplorarComidasArea from '../pages/ExplorarComidasArea';
 import Perfil from '../pages/Perfil';
@@ -55,7 +53,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de comidas', () => {
-    renderWithRedux(<Comidas />);
+    renderWithRouterAndStore(<App />, '/comidas');
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comidas');
     profileIconTest();
@@ -79,7 +77,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de bebidas', () => {
-    renderWithRedux(<Bebidas />);
+    renderWithRouterAndStore(<App />, '/bebidas');
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebidas');
     profileIconTest();

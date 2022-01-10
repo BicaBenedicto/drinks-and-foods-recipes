@@ -4,8 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import store from './redux/store/index';
-import Comidas from './pages/Comidas';
-import Bebidas from './pages/Bebidas';
+import ComidasOuBebidas from './pages/ComidasOuBebidas';
 import InProgress from './pages/InProgress';
 import Explorar from './pages/Explorar';
 import ExplorarBebidasOuComidas from './pages/ExplorarBebidasOuComidas';
@@ -28,8 +27,8 @@ function App() {
           <Route path="/bebidas/:id/in-progress" component={ InProgress } />
           <Route path="/comidas/:id" component={ Details } />
           <Route path="/bebidas/:id" component={ Details } />
-          <Route path="/comidas" component={ Comidas } />
-          <Route path="/bebidas" component={ Bebidas } />
+          <Route path="/comidas" component={ ComidasOuBebidas } />
+          <Route path="/bebidas" component={ ComidasOuBebidas } />
           <Route path="/explorar/comidas/area" component={ ExplorarComidasArea } />
           <Route path="/explorar/bebidas/area" component={ NotFound } />
           <Route
