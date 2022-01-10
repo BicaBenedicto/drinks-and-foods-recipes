@@ -35,29 +35,30 @@ export default function ExploreIngredientes() {
   };
 
   return (
-    <div>
+    <div className="main-page">
       <Header pageTitle="Explorar Ingredientes" />
-      <div className="container-ingredient-cards">
+      <div className="meals-cards">
         {
           strIngredients.map((value, index) => (
-            <button
-              type="button"
-              data-testid={ `${index}-ingredient-card` }
-              onClick={ () => onIngredientClick(value.strIngredient
-                || value.strIngredient1) }
-              className="ingredient-cards"
-              key={ value.idIngredient }
-            >
-              <img
-                src={ `https://www.${dbType}.com/images/ingredients/${
-                  value.strIngredient || value.strIngredient1}-Small.png` }
-                alt={ value.strIngredient || value.strIngredient1 }
-                data-testid={ `${index}-card-img` }
-              />
-              <h5 data-testid={ `${index}-card-name` }>
-                { value.strIngredient || value.strIngredient1 }
-              </h5>
-            </button>
+            <div className="card" key={ value.idIngredient }>
+              <button
+                type="button"
+                data-testid={ `${index}-ingredient-card` }
+                onClick={ () => onIngredientClick(value.strIngredient
+                  || value.strIngredient1) }
+                className="foodcard"
+              >
+                <img
+                  src={ `https://www.${dbType}.com/images/ingredients/${
+                    value.strIngredient || value.strIngredient1}-Small.png` }
+                  alt={ value.strIngredient || value.strIngredient1 }
+                  data-testid={ `${index}-card-img` }
+                />
+                <h5 data-testid={ `${index}-card-name` } className="name-card-food">
+                  { value.strIngredient || value.strIngredient1 }
+                </h5>
+              </button>
+            </div>
           ))
         }
       </div>

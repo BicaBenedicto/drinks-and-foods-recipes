@@ -1,20 +1,28 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import { actionFetchList, actionFetchCategory, actionFetchName } from '../redux/actions';
 import Cards from '../components/Cards';
 import Header from '../components/Header';
 import '../styles/foodcard.css';
 import Footer from '../components/Footer';
+import '../styles/MealsOrDrinks.css';
 
-const pageActual = 'Bebidas';
-
-function Bebidas() {
+function Foods() {
   const disp = useDispatch();
   const mealsLength = 12;
   const categoriesLength = 5;
+  const { pathname } = useLocation();
+  const [, PAGE] = pathname.split('/');
   const history = useHistory();
   const { location } = history;
+  const typeObjPage = {
+    pageActual: (PAGE === 'comidas' ? 'Comidas' : 'Bebidas'),
+    idType: (PAGE === 'comidas' ? 'idMeal' : 'idDrink'),
+    strType: (PAGE === 'comidas' ? 'strMeal' : 'strDrink'),
+    strTypeThumb: (PAGE === 'comidas' ? 'strMealThumb' : 'strDrinkThumb'),
+  };
+  const { pageActual, idType, strType, strTypeThumb } = typeObjPage;
 
   useEffect(() => {
     if (!location.state || !location.state.fromExplorar) {
@@ -47,9 +55,8 @@ function Bebidas() {
     <div className="main-page">
       <Header pageTitle={ pageActual } />
       <div className="all-categories">
-        <label htmlFor="All">
+        <label htmlFor="All" className="meals-categories">
           <input
-            className="all-categorie"
             data-testid="All-category-filter"
             id="All"
             type="checkbox"
@@ -87,11 +94,11 @@ function Bebidas() {
               className="card"
               data-testid={ `${index}-recipe-card` }
               key={ index }
-              to={ `/bebidas/${meal.idDrink}` }
+              to={ `/${PAGE}/${meal[idType]}` }
             >
               <Cards
-                name={ meal.strDrink }
-                thumb={ meal.strDrinkThumb }
+                name={ meal[strType] }
+                thumb={ meal[strTypeThumb] }
                 index={ index }
               />
             </Link>
@@ -102,4 +109,4 @@ function Bebidas() {
   );
 }
 
-export default Bebidas;
+export default Foods;

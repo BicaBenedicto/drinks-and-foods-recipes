@@ -4,6 +4,6 @@ import App from './App';
 
 test('Farewell, front-end', () => {
   const { getByText } = renderWithRouter(<App />);
-  const linkElement = getByText(/TRYBE/i);
+  const linkElement = getByText(/drinks and foods/i);
   expect(linkElement).toBeInTheDocument();
 });

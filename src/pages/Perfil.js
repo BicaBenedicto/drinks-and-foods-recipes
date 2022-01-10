@@ -6,7 +6,6 @@ import Header from '../components/Header';
 function Perfil() {
   const emailJSON = localStorage.getItem('user');
   const email = JSON.parse(emailJSON) || { email: '' };
-  console.log(email);
   const history = useHistory();
 
   function clearAndRedirect() {

@@ -1,0 +1,11 @@
+.main-page {
+  align-items: center;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+header {
+  width: 100%;
+}

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { actionFetchFoodArea, actionFetchName } from '../redux/actions/index';
+import '../styles/foodcard.css';
 
 function ExplorarComidasArea() {
   const disp = useDispatch();
@@ -18,12 +19,11 @@ function ExplorarComidasArea() {
 
   const storageRedux = useSelector((state) => state.meal);
   const foodArea = [{ strArea: 'All' }].concat(storageRedux.categories);
-  console.log(storageRedux);
 
   return (
     <>
       <Header pageTitle="Explorar Origem" />
-      <div>
+      <div className="main-page">
         {foodArea
           ? (
             <select
@@ -46,27 +46,29 @@ function ExplorarComidasArea() {
             </select>
           ) : <span>Carregando...</span>}
       </div>
-      <div>
+      <div className="meals-cards">
         {storageRedux.list.filter((_value, index) => index < NUMBER_RENDER)
           .map((item, index) => (
-            <button
-              type="button"
-              onClick={ () => history.push(`/comidas/${item.idMeal}`) }
-              data-testid={ `${index}-recipe-card` }
-              key={ item.idMeal }
-              className="card"
-            >
-              <img
-                src={ item.strMealThumb }
-                alt={ item.strMeal }
-                data-testid={ `${index}-card-img` }
-              />
-              <span
-                data-testid={ `${index}-card-name` }
+            <div className="card" key={ item.idMeal }>
+              <button
+                type="button"
+                onClick={ () => history.push(`/comidas/${item.idMeal}`) }
+                data-testid={ `${index}-recipe-card` }
+                className="foodcard"
               >
-                { item.strMeal }
-              </span>
-            </button>
+                <img
+                  src={ item.strMealThumb }
+                  alt={ item.strMeal }
+                  data-testid={ `${index}-card-img` }
+                />
+                <span
+                  data-testid={ `${index}-card-name` }
+                  className="name-card-food"
+                >
+                  { item.strMeal }
+                </span>
+              </button>
+            </div>
           ))}
       </div>
       <Footer />
