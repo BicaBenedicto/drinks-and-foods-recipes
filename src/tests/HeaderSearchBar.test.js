@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { cleanup, screen } from '@testing-library/react';
 import App from '../App';
 import fetchMock from './mocks/fetch';
-import { renderWithRouterAndStore } from './renderWithRouterAndRedux'
+import { renderWithRouterAndStore } from './renderWithRouterAndRedux';
 
 const SEARCH = 'a';
 const FOOD = 'Arrabiata';
-const BRIE = 'Brie'
-const NOT_FOOD = '123';
+const BRIE = 'Brie';
+const buttonTop = () => (screen.getByTestId('search-top-btn'));
 
 const components = () => ({
   ingredient: screen.getByTestId('ingredient-search-radio'),
@@ -30,8 +30,8 @@ describe('Header Search Bar', () => {
   test(`Deve existir os data-testids tanto da barra de busca quanto de todos os 
   radio-buttons.`, () => {
     renderWithRouterAndStore(<App />, url('/comidas'));
-    const buttonTop = screen.getByTestId('search-top-btn');
-    userEvent.click(buttonTop);
+
+    userEvent.click(buttonTop());
     const {
       inputSearch,
       firstLetter,
@@ -48,8 +48,8 @@ describe('Header Search Bar', () => {
   test(`Redirecione para a tela de detalhes da receita caso apenas uma receita
    seja encontrada, com o ID da mesma na URL`, async () => {
     renderWithRouterAndStore(<App />, url('/comidas'));
-    const buttonTop = screen.getByTestId('search-top-btn');
-    userEvent.click(buttonTop);
+    buttonTop();
+    userEvent.click(buttonTop());
     const {
       inputSearch,
       buttonSearch,
@@ -62,10 +62,10 @@ describe('Header Search Bar', () => {
     expect(titleRecipe).toBeInTheDocument();
   });
 
-  test(`Pesquisa por ingrediente`, async () => {
+  test('Pesquisa por ingrediente', async () => {
     renderWithRouterAndStore(<App />, url('/comidas'));
-    const buttonTop = screen.getByTestId('search-top-btn');
-    userEvent.click(buttonTop);
+    buttonTop();
+    userEvent.click(buttonTop());
     const {
       inputSearch,
       buttonSearch,
@@ -78,10 +78,10 @@ describe('Header Search Bar', () => {
     expect(resultFood).toBeInTheDocument();
   });
 
-  test(`Pesquisa por ingrediente`, async () => {
+  test('Pesquisa por ingrediente', async () => {
     renderWithRouterAndStore(<App />, url('/comidas'));
-    const buttonTop = screen.getByTestId('search-top-btn');
-    userEvent.click(buttonTop);
+    buttonTop();
+    userEvent.click(buttonTop());
     const {
       inputSearch,
       buttonSearch,
@@ -93,6 +93,4 @@ describe('Header Search Bar', () => {
     const resultFood = await screen.findByText('Corba');
     expect(resultFood).toBeInTheDocument();
   });
-
-
 });
