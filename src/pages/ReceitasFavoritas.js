@@ -108,7 +108,7 @@ function ReceitasFavoritas() {
               />
             </div>
           ))
-          : <h1>Você não tem receitas favoritas ainda!</h1>}
+          : <h1 data-testid="message-empty">Você não tem receitas favoritas ainda!</h1>}
       </div>
     </>
   );
