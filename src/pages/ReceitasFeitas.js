@@ -102,7 +102,7 @@ function ReceitasFeitas() {
               />
             </div>
           ))
-          : <h1>Você não tem receitas feitas ainda!</h1>}
+          : <h1 data-testid="empty-message">Você não tem receitas feitas ainda!</h1>}
       </div>
     </>
   );
