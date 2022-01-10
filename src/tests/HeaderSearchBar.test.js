@@ -90,7 +90,7 @@ describe('Header Search Bar', () => {
     userEvent.type(inputSearch, SEARCH);
     userEvent.click(firstLetter);
     userEvent.click(buttonSearch);
-    const resultFood = await screen.findByText('Corba');
-    expect(resultFood).toBeInTheDocument();
+    const resultSearch = await screen.findByText('Corba');
+    expect(resultSearch).toBeInTheDocument();
   });
 });
