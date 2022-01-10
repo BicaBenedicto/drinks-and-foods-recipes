@@ -40,6 +40,7 @@ const TEST_PAGE = {
 
 describe('Teste do Header na tela de', () => {
   beforeEach(() => {
+    console.log(global.fetch.finally);
     jest.spyOn(global, 'fetch')
       .mockImplementation(fetchMock);
   });
