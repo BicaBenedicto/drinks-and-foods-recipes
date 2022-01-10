@@ -40,7 +40,7 @@ const URL = {
 async function fetchIngrediente(ingrediente, page) {
   const { searchByIngredients } = URL;
   const response = await fetch(`${searchByIngredients[page
-    .toLowerCase()]}${ingrediente}/`);
+    .toLowerCase()]}${ingrediente}`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
@@ -55,7 +55,7 @@ async function fetchName(name, page) {
 async function fetchFirstLetter(firstLetter, page) {
   const { searchByFirstLetter } = URL;
   const response = await fetch(`${searchByFirstLetter[page
-    .toLowerCase()]}${firstLetter}/`);
+    .toLowerCase()]}${firstLetter}`);
   const results = await response.json();
   return results.meals || results.drinks;
 }
