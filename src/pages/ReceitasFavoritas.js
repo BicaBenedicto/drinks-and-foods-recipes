@@ -107,6 +107,7 @@ function ReceitasFavoritas() {
                 />
               </div>
             </div>
+<<<<<<< HEAD
             <FavoriteButton
               index={ index }
               RECIPE_ID={ recipe.id }
@@ -115,6 +116,12 @@ function ReceitasFavoritas() {
         ))
         : <h1>Você não tem receitas favoritas ainda!</h1>}
     </div>
+=======
+          ))
+          : <h1 data-testid="message-empty">Você não tem receitas favoritas ainda!</h1>}
+      </div>
+    </>
+>>>>>>> 660b29de3b98ec46ed0d4bddac12cfd4c6d48a76
   );
 }
 

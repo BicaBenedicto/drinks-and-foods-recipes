@@ -104,10 +104,17 @@ function ReceitasFeitas() {
                 />
               </div>
             </div>
+<<<<<<< HEAD
           </div>
         ))
         : <h1>Você não tem receitas feitas ainda!</h1>}
     </div>
+=======
+          ))
+          : <h1 data-testid="empty-message">Você não tem receitas feitas ainda!</h1>}
+      </div>
+    </>
+>>>>>>> 660b29de3b98ec46ed0d4bddac12cfd4c6d48a76
   );
 }
 
