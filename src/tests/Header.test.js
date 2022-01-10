@@ -54,7 +54,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de comidas', () => {
-    renderWithRouterAndStore(<App />, '/comidas');
+    renderWithRouterAndStore(<App />, { route: '/comidas' });
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comidas');
     profileIconTest();
@@ -62,7 +62,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida detalhadas', () => {
-    renderWithRouterAndStore(<App />, '/comidas/31232');
+    renderWithRouterAndStore(<App />, { route: '/comidas/52977' });
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -70,7 +70,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida em progesso', () => {
-    renderWithRouterAndStore(<App />, '/comidas/31232/in-progress');
+    renderWithRouterAndStore(<App />, { route: '/comidas/52977/in-progress' });
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -78,7 +78,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de bebidas', () => {
-    renderWithRouterAndStore(<App />, '/bebidas');
+    renderWithRouterAndStore(<App />, { route: '/bebidas' });
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebidas');
     profileIconTest();
@@ -86,7 +86,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de Bebidas detalhadas', () => {
-    renderWithRouterAndStore(<App />, '/bebidas/31232');
+    renderWithRouterAndStore(<App />, { route: '/bebidas/52977' });
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebida', false);
     searchIconTest(false);
@@ -94,7 +94,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de Bebida em progesso', () => {
-    renderWithRouterAndStore(<App />, '/bebidas/31232/in-progress');
+    renderWithRouterAndStore(<App />, '/bebidas/52977/in-progress');
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebida', false);
     searchIconTest(false);
