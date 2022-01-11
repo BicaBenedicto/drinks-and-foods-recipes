@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
-import Context from '../services/Context';
 import { actionFetchIngrediente, actionFetchName,
   actionFetchFirstLetter } from '../redux/actions';
 
 function SearchBar() {
-  const { searchFood, setSearchFood } = useContext(Context);
+  const [searchFood, setSearchFood] = useState('');
   const { list } = useSelector((state) => state.meal);
   const pageActual = useLocation().pathname;
   const page = pageActual.replace('/', '');

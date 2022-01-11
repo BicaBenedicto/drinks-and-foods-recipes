@@ -1,0 +1,69 @@
+.receitas-feitas-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+}
+
+.receitas-feitas-page .card-item {
+  align-items: center;
+  background-color: var(--i-main);
+  color: var(--headline);
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  padding: 20px 0;
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.receitas-feitas-page .card-item .horizontal-image {
+  filter: brightness(70%);
+  height: 100%;
+  margin: 0 10px;
+  position: relative;
+  width: 80%;
+  z-index: 0;
+}
+
+.receitas-feitas-page .card-item p {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+/* .receitas-feitas-page .card-item .share-button {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  width: 100%;
+} */
+
+.receitas-feitas-page .card-item div {
+  position: relative;
+  width: 90%;
+  z-index: 1;
+}
+
+.receitas-feitas-page .buttons-filter {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.receitas-feitas-page .buttons-filter button {
+  background-color: var(--i-tertiary);
+  border: 1px solid white;
+  flex-grow: 1;
+}
+
+/* .receitas-feitas-page .favorite-button {
+  background-color: var(--i-tertiary);
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+} */

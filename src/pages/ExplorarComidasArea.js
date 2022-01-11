@@ -28,6 +28,7 @@ function ExplorarComidasArea() {
           ? (
             <select
               data-testid="explore-by-area-dropdown"
+              className="filtro-explorar"
               onChange={ (e) => {
                 setFilterArea(e.target.value);
                 disp(actionFetchFoodArea('search', e.target.value));

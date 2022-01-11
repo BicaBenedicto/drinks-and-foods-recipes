@@ -7,8 +7,6 @@ import App from '../App';
 import Explorar from '../pages/Explorar';
 import ExplorarComidasArea from '../pages/ExplorarComidasArea';
 import Perfil from '../pages/Perfil';
-import ReceitasFavoritas from '../pages/ReceitasFavoritas';
-import ReceitasFeitas from '../pages/ReceitasFeitas';
 import fetchMock from './mocks/fetch';
 
 const GET_BY = {
@@ -38,12 +36,15 @@ const TEST_PAGE = {
   },
 };
 
+const URL_ROUTE = (route) => ({ route });
+
 describe('Teste do Header na tela de', () => {
   beforeEach(() => {
     jest.spyOn(global, 'fetch')
       .mockImplementation(fetchMock);
   });
   afterEach(cleanup);
+
   it('o componente teste não aparece na tela de login', () => {
     renderWithRouter(<App />);
     const { headerTest, searchIconTest, profileIconTest } = TEST_PAGE;
@@ -53,7 +54,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de comidas', () => {
-    renderWithRouterAndStore(<App />, { route: '/comidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comidas');
     profileIconTest();
@@ -61,7 +62,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida detalhadas', () => {
-    renderWithRouterAndStore(<App />, { route: '/comidas/52977' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas/52977'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -69,7 +70,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de comida em progesso', () => {
-    renderWithRouterAndStore(<App />, { route: '/comidas/52977/in-progress' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas/52977/in-progress'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Comida', false);
     searchIconTest(false);
@@ -77,7 +78,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de bebidas', () => {
-    renderWithRouterAndStore(<App />, { route: '/bebidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/bebidas'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebidas');
     profileIconTest();
@@ -85,7 +86,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header não aparece na página de Bebidas detalhadas', () => {
-    renderWithRouterAndStore(<App />, { route: '/bebidas/52977' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/bebidas/52977'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Bebida', false);
     searchIconTest(false);
@@ -109,7 +110,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de explorar comidas', () => {
-    renderWithRouterAndStore(<App />, { route: '/explorar/comidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/explorar/comidas'));
 
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Explorar Comidas');
@@ -118,7 +119,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de explorar Bebidas', () => {
-    renderWithRouterAndStore(<App />, { route: '/explorar/bebidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/explorar/bebidas'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Explorar Bebidas');
     profileIconTest();
@@ -142,7 +143,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de receitas favoritas', () => {
-    renderWithRouter(<ReceitasFavoritas />);
+    renderWithRouterAndStore(<App />, URL_ROUTE('/receitas-favoritas'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Receitas Favoritas');
     profileIconTest();
@@ -150,7 +151,7 @@ describe('Teste do Header na tela de', () => {
   });
 
   it('o componente header aparece na página de receitas feitas', () => {
-    renderWithRouter(<ReceitasFeitas />);
+    renderWithRouterAndStore(<App />, URL_ROUTE('/receitas-feitas'));
     const { headerTest, profileIconTest, searchIconTest } = TEST_PAGE;
     headerTest('Receitas Feitas');
     profileIconTest();

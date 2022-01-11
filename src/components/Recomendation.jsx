@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import './Recomendation.css';
+import '../styles/Recomendation.css';
 
 function ComidaDetails() {
   const { pathname } = useLocation();

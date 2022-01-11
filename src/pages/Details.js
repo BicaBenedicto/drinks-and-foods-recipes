@@ -8,6 +8,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import StartButton from '../components/StartButton';
 import IngredientsAndMeasure from '../components/IngredientsAndMeasure';
 import Context from '../services/Context';
+import '../styles/Details.css';
 
 export default function Details() {
   const disp = useDispatch();
@@ -54,9 +55,10 @@ export default function Details() {
     <main>
       { loading ? <h1>Carregando...</h1>
         : (
-          <>
+          <div className="details-page">
             <FavoriteButton />
             <img
+              className="recipe-image"
               data-testid="recipe-photo"
               src={ item[`str${TYPE}Thumb`] }
               alt={ item[`str${TYPE}`] }
@@ -68,7 +70,12 @@ export default function Details() {
               { item.strAlcoholic || item.strCategory }
             </h4>
             <IngredientsAndMeasure />
-            <span data-testid="instructions">{ item.strInstructions }</span>
+            <span
+              data-testid="instructions"
+              className="instructions"
+            >
+              { item.strInstructions }
+            </span>
             { (PAGE === 'comidas' && item.strYoutube) && <iframe
               title={ item[`str${TYPE}`] }
               data-testid="video"
@@ -82,7 +89,7 @@ export default function Details() {
               page={ PAGE }
               id={ item[`id${TYPE}`] }
             />}
-          </>
+          </div>
         )}
       ;
     </main>

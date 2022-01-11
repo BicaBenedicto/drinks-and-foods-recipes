@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(45deg, blue, red 50%);
+  background: var(--i-secondary);
   bottom: 0;
   display: flex;
   justify-content: space-around;
@@ -7,3 +7,8 @@
   width: 100%;
 }
 
+.footer button {
+  background-color: transparent;
+  border: none;
+  padding: 5px 0;
+}

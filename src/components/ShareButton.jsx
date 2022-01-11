@@ -16,6 +16,7 @@ function ShareButton({ index, url }) {
     <div>
       <button
         type="button"
+        className="share-button"
         onClick={ copyCodeToClipboar }
       >
         { hasCoppied

@@ -22,9 +22,9 @@ function ReceitasFavoritas() {
   }, []);
 
   return (
-    <>
+    <div className="receitas-feitas-page">
       <Header pageTitle="Receitas Favoritas" />
-      <div>
+      <div className="buttons-filter">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -37,7 +37,7 @@ function ReceitasFavoritas() {
           data-testid="filter-by-food-btn"
           onClick={ () => setCategories('comida') }
         >
-          Food
+          Foods
         </button>
         <button
           type="button"
@@ -46,49 +46,33 @@ function ReceitasFavoritas() {
         >
           Drinks
         </button>
-        { hasfavoriteRecipes
-          ? favoriteRecipes.filter((recipe) => {
-            if (categories === 'All' || recipe.type === categories) return true;
-            return false;
-          }).map((recipe, index) => (
-            <div key={ recipe.id }>
-              <Link
-                className="card"
-                to={ (recipe.type === 'comida'
-                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-              >
-                <img
-                  data-testid={ `${index}-horizontal-image` }
-                  src={ recipe.image }
-                  alt={ recipe.name }
-                  className="horizontal-image"
-                />
-              </Link>
-              <p
-                className="categories-text"
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
-              </p>
-              <Link
-                className="card"
-                to={ (recipe.type === 'comida'
-                  ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
-              >
+      </div>
+      { hasfavoriteRecipes
+        ? favoriteRecipes.filter((recipe) => {
+          if (categories === 'All' || recipe.type === categories) return true;
+          return false;
+        }).map((recipe, index) => (
+          <div key={ recipe.id } className="card-item">
+            <Link
+              className="card"
+              to={ (recipe.type === 'comida'
+                ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+            >
+              <img
+                data-testid={ `${index}-horizontal-image` }
+                src={ recipe.image }
+                alt={ recipe.name }
+                className="horizontal-image"
+              />
+            </Link>
+            <div>
+              <div className="categories-text">
                 <p
-                  className="recipes-text"
-                  data-testid={ `${index}-horizontal-name` }
+                  className="categories-text"
+                  data-testid={ `${index}-horizontal-top-text` }
                 >
-                  { recipe.name }
+                  { `${recipe.area || recipe.alcoholicOrNot} - ${recipe.category}` }
                 </p>
-              </Link>
-              <p
-                className="date"
-                data-testid={ `${index}-horizontal-done-date` }
-              >
-                { recipe.doneDate }
-              </p>
-              <div>
                 { recipe.tags && recipe.tags.map((tag, i) => (
                   <p
                     data-testid={ `${index}-${tag}-horizontal-tag` }
@@ -98,19 +82,39 @@ function ReceitasFavoritas() {
                   </p>
                 ))}
               </div>
-              <ShareButton
-                index={ index }
-                url={ renderUrl(recipe.type, recipe.id) }
-              />
-              <FavoriteButton
-                index={ index }
-                RECIPE_ID={ recipe.id }
-              />
+              <div>
+                <Link
+                  className="card"
+                  to={ (recipe.type === 'comida'
+                    ? `/comidas/${recipe.id}` : `/bebidas/${recipe.id}`) }
+                >
+                  <p
+                    className="recipes-text"
+                    data-testid={ `${index}-horizontal-name` }
+                  >
+                    { recipe.name }
+                  </p>
+                </Link>
+                <p
+                  className="date"
+                  data-testid={ `${index}-horizontal-done-date` }
+                >
+                  { recipe.doneDate }
+                </p>
+                <ShareButton
+                  index={ index }
+                  url={ renderUrl(recipe.type, recipe.id) }
+                />
+              </div>
             </div>
-          ))
-          : <h1 data-testid="message-empty">Você não tem receitas favoritas ainda!</h1>}
-      </div>
-    </>
+            <FavoriteButton
+              index={ index }
+              RECIPE_ID={ recipe.id }
+            />
+          </div>
+        ))
+        : <h1>Você não tem receitas favoritas ainda!</h1>}
+    </div>
   );
 }
 

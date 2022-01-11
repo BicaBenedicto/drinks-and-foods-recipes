@@ -12,7 +12,7 @@ export default function IngredientsAndMeasure() {
   }, []);
 
   return (
-    <ol>
+    <ol className="ingredients-list">
       <h2>Ingredientes</h2>
       {ingredients.map((ingredient, index) => (
         <li

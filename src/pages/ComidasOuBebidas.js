@@ -23,20 +23,15 @@ function Foods() {
     strTypeThumb: (PAGE === 'comidas' ? 'strMealThumb' : 'strDrinkThumb'),
   };
   const { pageActual, idType, strType, strTypeThumb } = typeObjPage;
-
   useEffect(() => {
     if (!location.state || !location.state.fromExplorar) {
       disp(actionFetchName('', pageActual));
     }
     disp(actionFetchList(pageActual));
     history.push({ state: { fromExplorar: false } });
-  }, []);
+  }, [PAGE]);
 
   const { list, categories } = useSelector((state) => state.meal);
-
-  if (!list || !categories) {
-    return <div>Carregando...</div>;
-  }
 
   function handleChange(target, strCategory) {
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -88,21 +83,23 @@ function Foods() {
         }
       </div>
       <div className="meals-cards">
-        { list.filter((_, index) => index < mealsLength)
-          .map((meal, index) => (
-            <Link
-              className="card"
-              data-testid={ `${index}-recipe-card` }
-              key={ index }
-              to={ `/${PAGE}/${meal[idType]}` }
-            >
-              <Cards
-                name={ meal[strType] }
-                thumb={ meal[strTypeThumb] }
-                index={ index }
-              />
-            </Link>
-          ))}
+        { !list || !categories
+          ? <div>Carregando...</div>
+          : list.filter((_, index) => index < mealsLength)
+            .map((meal, index) => (
+              <Link
+                className="card"
+                data-testid={ `${index}-recipe-card` }
+                key={ index }
+                to={ `/${PAGE}/${meal[idType]}` }
+              >
+                <Cards
+                  name={ meal[strType] }
+                  thumb={ meal[strTypeThumb] }
+                  index={ index }
+                />
+              </Link>
+            ))}
       </div>
       <Footer />
     </div>

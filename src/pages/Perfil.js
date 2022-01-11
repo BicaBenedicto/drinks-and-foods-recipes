@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../styles/Perfil.css';
 
 function Perfil() {
   const emailJSON = localStorage.getItem('user');
@@ -15,7 +16,7 @@ function Perfil() {
   return (
     <>
       <Header pageTitle="Perfil" />
-      <div>
+      <div className="perfil-receitas">
         <h1 data-testid="profile-email">{ email.email }</h1>
         <button
           type="button"
