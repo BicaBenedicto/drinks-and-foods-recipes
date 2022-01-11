@@ -82,10 +82,10 @@
   width: 100%;
 }
 
-.details-page .lista-checkbox input {
-  /* display: none; */
+/* .details-page .lista-checkbox input {
+  display: none;
   margin: 5px;
-}
+} */
 
 .details-page .end-recipe {
   background-color: var(--i-secondary);
