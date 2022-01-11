@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
@@ -36,7 +35,7 @@ function ReceitasFeitas() {
           data-testid="filter-by-food-btn"
           onClick={ () => setCategories('comida') }
         >
-          Food
+          Foods
         </button>
         <button
           type="button"
@@ -104,17 +103,10 @@ function ReceitasFeitas() {
                 />
               </div>
             </div>
-<<<<<<< HEAD
           </div>
         ))
         : <h1>Você não tem receitas feitas ainda!</h1>}
     </div>
-=======
-          ))
-          : <h1 data-testid="empty-message">Você não tem receitas feitas ainda!</h1>}
-      </div>
-    </>
->>>>>>> 660b29de3b98ec46ed0d4bddac12cfd4c6d48a76
   );
 }
 

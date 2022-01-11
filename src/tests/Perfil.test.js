@@ -30,11 +30,11 @@ describe('Testa tela de perfil', () => {
     `Testa se ao clicar no botão de receitas feitas,
      renderiza o componente "ReceitasFeitas"`,
     async () => {
-      renderWithRouterAndStore(<App />, URL('/perfil'));
+      const { history } = renderWithRouterAndStore(<App />, URL('/perfil'));
       const { doneBtn } = components();
       userEvent.click(doneBtn);
-      const emptyMessage = screen.getByTestId('empty-message');
-      expect(emptyMessage).toBeInTheDocument();
+      const { pathname } = history.location;
+      expect(pathname).toBe('/receitas-feitas');
     },
   );
 
@@ -48,11 +48,11 @@ describe('Testa tela de perfil', () => {
     `Testa se ao clicar no botão de receitas favoritas,
      renderiza o componente "ReceitasFavoritas"`,
     async () => {
-      renderWithRouterAndStore(<App />, URL('/perfil'));
+      const { history } = renderWithRouterAndStore(<App />, URL('/perfil'));
       const { favoriteBtn } = components();
       userEvent.click(favoriteBtn);
-      const emptyMessage = screen.getByTestId('message-empty');
-      expect(emptyMessage).toBeInTheDocument();
+      const { pathname } = history.location;
+      expect(pathname).toBe('/receitas-favoritas');
     },
   );
 

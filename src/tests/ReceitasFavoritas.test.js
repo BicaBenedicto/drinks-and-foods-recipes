@@ -29,7 +29,11 @@ const FIND_ITEMS = {
   heartEmptyIcon: 'whiteHeartIcon.svg',
   heartFull: 'coração preenchido',
   heartFullIcon: 'blackHeartIcon.svg',
+  horizontalTop: '1-horizontal-top-text',
+  receitasFavoritas: '/receitas-favoritas',
 };
+
+const URL_ROUTE = (route) => ({ route });
 
 describe('Testes de favorito e página de receitas favoritas', () => {
   beforeEach(mockFetch);
@@ -41,7 +45,7 @@ describe('Testes de favorito e página de receitas favoritas', () => {
   });
 
   it('a receita de comida possui botão de favoritar', async () => {
-    renderWithRouterAndStore(<App />, { route: '/comidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas'));
     const receita = await screen.findByTestId(FIND_ITEMS.cardImg);
     expect(receita).toBeInTheDocument();
 
@@ -54,7 +58,7 @@ describe('Testes de favorito e página de receitas favoritas', () => {
   });
 
   it('a receita de comida é favoritada ao clicar no botão de favoritar', async () => {
-    const { history } = renderWithRouterAndStore(<App />, { route: '/comidas' });
+    const { history } = renderWithRouterAndStore(<App />, URL_ROUTE('/comidas'));
     const receita = await screen.findByTestId(FIND_ITEMS.cardImg);
     expect(receita).toBeInTheDocument();
 
@@ -66,7 +70,7 @@ describe('Testes de favorito e página de receitas favoritas', () => {
     expect(favoriteButton).toBeInTheDocument();
     fireEvent.click(favoriteButton);
 
-    history.push('/receitas-favoritas');
+    history.push(FIND_ITEMS.receitasFavoritas);
 
     const userIcon = screen.getByTestId('profile-top-btn');
     expect(userIcon).toBeInTheDocument();
@@ -78,7 +82,7 @@ describe('Testes de favorito e página de receitas favoritas', () => {
   });
 
   it('a receita de bebida possui botão de favoritar', async () => {
-    renderWithRouterAndStore(<App />, { route: '/bebidas' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/bebidas'));
     const receita = await screen.findByTestId(FIND_ITEMS.cardImg);
     expect(receita).toBeInTheDocument();
 
@@ -91,24 +95,24 @@ describe('Testes de favorito e página de receitas favoritas', () => {
   });
 
   it('a receita de bebida é favoritada ao clicar no botão de favoritar', async () => {
-    const { history } = renderWithRouterAndStore(<App />, { route: '/bebidas/15997' });
+    const { history } = renderWithRouterAndStore(<App />, URL_ROUTE('/bebidas/15997'));
     const favoriteButton = await screen.findByTestId(FIND_ITEMS.favoriteButton);
     expect(favoriteButton).toBeInTheDocument();
     fireEvent.click(favoriteButton);
 
-    history.push('/receitas-favoritas');
+    history.push(FIND_ITEMS.receitasFavoritas);
 
     const userIcon = screen.getByTestId('profile-top-btn');
     expect(userIcon).toBeInTheDocument();
 
     expect(favoriteButton).not.toBeInTheDocument();
 
-    const receitaCorba = await screen.findByTestId('1-horizontal-top-text');
+    const receitaCorba = await screen.findByTestId(FIND_ITEMS.horizontalTop);
     expect(receitaCorba).toBeInTheDocument();
   });
 
   it('os elementos possuem botão de favoritar da forma correta', async () => {
-    renderWithRouterAndStore(<App />, { route: '/comidas/53060' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas/53060'));
 
     const favoriteButton = await screen.findByTestId(FIND_ITEMS.favoriteButton);
     expect(favoriteButton).toBeInTheDocument();
@@ -130,7 +134,7 @@ describe('Testes de favorito e página de receitas favoritas', () => {
 
   it('os elementos possuem botão de favoritar da forma correta', async () => {
     localStorage.clear();
-    renderWithRouterAndStore(<App />, { route: '/comidas/53060' });
+    renderWithRouterAndStore(<App />, URL_ROUTE('/comidas/53060'));
 
     const favoriteButton = await screen.findByTestId(FIND_ITEMS.favoriteButton);
     expect(favoriteButton).toBeInTheDocument();
@@ -152,5 +156,31 @@ describe('Testes de favorito e página de receitas favoritas', () => {
     const receitasSalvas2 = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
     expect(receitasSalvas2).not.toEqual(expectedFavoriteRecipeSaved);
+  });
+
+  it('a receita de comida mostra ao ir na pagina de receitas favoritas', async () => {
+    renderWithRouterAndStore(<App />, URL_ROUTE(FIND_ITEMS.receitasFavoritas));
+
+    const comida = await screen.findByTestId(FIND_ITEMS.horizontalTop);
+
+    expect(comida).toBeInTheDocument();
+
+    const filterAll = screen.getByText('All');
+    const filterDrinks = screen.getByText('Drinks');
+    const filterFoods = screen.getByText('Foods');
+
+    expect(filterAll).toBeInTheDocument();
+    expect(filterFoods).toBeInTheDocument();
+    expect(filterDrinks).toBeInTheDocument();
+
+    fireEvent.click(filterDrinks);
+
+    expect(comida).not.toBeInTheDocument();
+
+    fireEvent.click(filterAll);
+
+    const comida2 = await screen.findByTestId(FIND_ITEMS.horizontalTop);
+
+    expect(comida2).toBeInTheDocument();
   });
 });

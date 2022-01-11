@@ -2,8 +2,8 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  position: relative;
   padding-bottom: 50px;
+  position: relative;
   width: 100%;
 }
 
@@ -13,8 +13,8 @@
 }
 
 .details-page .recipe-image-progress {
-  height: 450px;
   filter: brightness(70%);
+  height: 450px;
   width: 100%;
 }
 
@@ -32,9 +32,9 @@
   background-color: var(--i-tertiary);
   border: none;
   border-radius: 5px;
+  left: 20px;
   position: absolute;
   top: 10px;
-  left: 20px;
   z-index: 1;
 }
 
@@ -57,9 +57,9 @@
 .details-page .instructions {
   background-color: var(--background);
   font-size: 18px;
-  text-align: center;
-  padding: 20px;
   height: 50%;
+  padding: 20px;
+  text-align: center;
   width: 100%;
 }
 
@@ -90,12 +90,12 @@
 .details-page .end-recipe {
   background-color: var(--i-secondary);
   border: none;
+  bottom: 0;
   color: var(--headline);
   font-size: 30px;
+  left: 0;
   padding: 10px 0;
   position: fixed;
-  bottom: 0;
-  left: 0;
   width: 100%;
 }
 

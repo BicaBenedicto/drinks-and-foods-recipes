@@ -153,6 +153,7 @@ export default function FoodsInProgress() {
                 type="checkbox"
                 id={ food[ingredient] }
                 name={ food[ingredient] }
+                data-testid="item-list-li"
                 onClick={ (event) => handleClick(event, items, newItems) }
                 defaultChecked={ verifyrecipe
                     && savedRecipe[recipe][food[idRecipe]]
