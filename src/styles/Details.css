@@ -18,7 +18,7 @@
   width: 100%;
 }
 
-/* .details-page .favorite-button {
+.details-page .favorite-button {
   background-color: var(--i-tertiary);
   border: none;
   border-radius: 5px;
@@ -36,7 +36,7 @@
   position: absolute;
   top: 10px;
   z-index: 1;
-} */
+}
 
 .details-page .start-recipe {
   background-color: var(--i-secondary);
@@ -82,10 +82,10 @@
   width: 100%;
 }
 
-/* .details-page .lista-checkbox input {
+.details-page .lista-checkbox input {
   display: none;
   margin: 5px;
-} */
+}
 
 .details-page .end-recipe {
   background-color: var(--i-secondary);

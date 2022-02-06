@@ -21,9 +21,9 @@
   padding: 2px 5px;
 }
 
-/* .meals-categories input {
+.meals-categories input {
   display: none;
-} */
+}
 
 .meals-cards {
   display: flex;

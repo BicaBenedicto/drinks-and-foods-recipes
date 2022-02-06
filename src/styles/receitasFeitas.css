@@ -32,13 +32,13 @@
   font-weight: 600;
 }
 
-/* .receitas-feitas-page .card-item .share-button {
+.receitas-feitas-page .card-item .share-button {
   background-color: var(--i-tertiary);
   border: none;
   border-radius: 5px;
   margin: 0 10px;
   width: 100%;
-} */
+}
 
 .receitas-feitas-page .card-item div {
   position: relative;
@@ -58,7 +58,7 @@
   flex-grow: 1;
 }
 
-/* .receitas-feitas-page .favorite-button {
+.receitas-feitas-page .favorite-button {
   background-color: var(--i-tertiary);
   border: none;
   border-radius: 10px;
@@ -66,4 +66,4 @@
   position: absolute;
   right: 10px;
   top: 10px;
-} */
+}

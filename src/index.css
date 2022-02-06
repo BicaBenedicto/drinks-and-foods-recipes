@@ -24,6 +24,11 @@ body, #root {
   width: 100vw;
 }
 
+#root {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
